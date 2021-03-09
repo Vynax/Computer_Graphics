@@ -62,7 +62,7 @@ void ChangeSize(int w, int h)
 }
 void RenderScene(void)
 {
-	glClearColor(1.0, 1.0, 1.0, 1.0);
+	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -89,6 +89,10 @@ void RenderScene(void)
 	glColor3f(0, 1, 0); glVertex3f(-4, 4, -4);
 	glColor3f(0, 1, 0); glVertex3f(-4, -4, 0);
 	glColor3f(0, 1, 0); glVertex3f(-4, -4, -4);
+
+
+
+
 
 
 	glEnd();
