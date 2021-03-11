@@ -56,7 +56,7 @@ void ChangeSize(int w, int h)
 	glViewport(0, 0, w, h);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(-10, 10, -10, 10, -10, 10);
+	glOrtho(-4, 4, -4, 4, -4, 4);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
@@ -66,21 +66,24 @@ void RenderScene(void)
 	glClear(GL_COLOR_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	gluLookAt(0, 0, 1.0f, 0, 0, 0, 0, 1, 0);
-	glRotatef(45.0f, 1.0, 0.0, 0.0);
-	glRotatef(45.0f, 0.0, 1.0, 0.0);
-	// glRotatef(90.0f, 0.0, 0.0, 1.0);
+	gluLookAt(0, 0, 8, 0, 0, 0, 0, 1, 0);
+	// gluLookAt(0, 0, 1.0f, 0, 0, 0, 0, 1, 0);
+	glRotatef(30.0f, 1.0, 0.0, 0.0);
+	glRotatef(60.0f, 0.0, 1.0, 0.0);
+	glRotatef(30.0f, 0.0, 0.0, 1.0);
 
 	glBegin(GL_TRIANGLES);
-	glColor3f(1, 0, 0); glVertex3f(-4, 4, 0);
-	glColor3f(1, 0, 0); glVertex3f(4, -4, 0);
+
+	// red
 	glColor3f(1, 0, 0); glVertex3f(4, 4, 0);
-
-
-	glColor3f(1, 0, 0); glVertex3f(4, -4, 0);
 	glColor3f(1, 0, 0); glVertex3f(-4, 4, 0);
 	glColor3f(1, 0, 0); glVertex3f(-4, -4, 0);
 
+	glColor3f(1, 0, 0); glVertex3f(-4, -4, 0);
+	glColor3f(1, 0, 0); glVertex3f(4, -4, 0);
+	glColor3f(1, 0, 0); glVertex3f(4, 4, 0);
+
+	// green
 	glColor3f(0, 1, 0); glVertex3f(-4, 4, -4);
 	glColor3f(0, 1, 0); glVertex3f(-4, 4, 0);
 	glColor3f(0, 1, 0); glVertex3f(-4, -4, 0);
@@ -90,6 +93,14 @@ void RenderScene(void)
 	glColor3f(0, 1, 0); glVertex3f(-4, -4, 0);
 	glColor3f(0, 1, 0); glVertex3f(-4, -4, -4);
 
+	// blue
+	glColor3f(0, 0, 1); glVertex3f(4, 4, 0);
+	glColor3f(0, 0, 1); glVertex3f(4, 4, -4);
+	glColor3f(0, 0, 1); glVertex3f(-4, 4, -4);
+
+	glColor3f(0, 0, 1); glVertex3f(4, 4, 0);
+	glColor3f(0, 0, 1); glVertex3f(-4, 4, -4);
+	glColor3f(0, 0, 1); glVertex3f(-4, 4, 0);
 
 
 
