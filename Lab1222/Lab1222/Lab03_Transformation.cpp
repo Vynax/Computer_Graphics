@@ -2,8 +2,8 @@
  * OGL01Shape3D.cpp: 3D Shapes
  */
 
-#define angleX 0
-#define angleY -15
+#define angleX 30
+#define angleY -30
 #define angleZ 0
 
 #include <windows.h>  // for MS Windows
@@ -13,7 +13,7 @@
  /* Global variables */
 char title[] = "3D Shapes";
 float tx = 0, ty = 0, tz = 0;
-float thetaX = 0, thetaY = angleY, thetaZ = 0;
+float thetaX = angleX, thetaY = angleY, thetaZ = 0;
 
 
 /* Initialize OpenGL Graphics */
@@ -34,11 +34,9 @@ void display() {
 
 	// Render a pyramid consists of 4 triangles
 	glLoadIdentity();                  // Reset the model-view matrix
-	glTranslatef(tx, ty, tz);  // Move left and into the screen
 	gluLookAt(0, 0, 10.0f, 0, 0, 0, 0, 1, 0);
-	glRotatef(thetaX, 1, 0, 0);
-	glRotatef(thetaY, 0, 1, 0);
-	glRotatef(thetaZ, 0, 0, 1);
+	glRotatef(-30, 0, 1, 0);
+	glRotatef(15, 1, 0, 0);
 
 	glBegin(GL_LINES);
 	glColor3f(1.0f, 0.0f, 0.0f);     // Red X axis
@@ -54,6 +52,14 @@ void display() {
 	glVertex3f(0.0f, 0.0f, 2.0f);
 
 	glEnd();
+
+	glLoadIdentity();                  // Reset the model-view matrix
+	gluLookAt(0, 0, 10.0f, 0, 0, 0, 0, 1, 0);
+	glTranslatef(tx, ty, tz);  // Move left and into the screen
+	glRotatef(thetaX, 1, 0, 0);
+	glRotatef(thetaY, 0, 1, 0);
+	glRotatef(thetaZ, 0, 0, 1);
+
 
 
 	glBegin(GL_TRIANGLES);           // Begin drawing the pyramid with 4 triangles
