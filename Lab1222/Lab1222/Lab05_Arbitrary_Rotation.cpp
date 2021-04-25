@@ -9,15 +9,12 @@
 #include <iostream>
 #include <cmath>
 #include "function.h"
+// #include <functional> //without .h
 #include "draw.h"
 #include "global.h"
+#include "config.h"
 
-
-GLfloat translateMatrix[] = {
-1.0, 0.0, 0.0, 0.0,
-0.0, 1.0, 0.0, 0.0,
-0.0, 0.0, 1.0, 0.0,
-0.0, 0.0, 0.0, 1.0 };
+Config config;
 
 GLfloat rotMatrix_X[] = {
 1.0, 0.0, 0.0, 0.0,
@@ -72,10 +69,10 @@ void display() {
 	gluLookAt(0, 0, 15.0f, 0, 0, 0, 0, 1, 0);
 	//glTranslatef(tx, ty, tz);  // Move left and into the screen
 
-	translateMatrix[12] = tx;
-	translateMatrix[13] = ty;
-	translateMatrix[14] = tz;
-	glMultMatrixf(translateMatrix);
+	/*config.translateMatrix[12] = tx;
+	config.translateMatrix[13] = ty;
+	config.translateMatrix[14] = tz;*/
+	glMultMatrixf(config.getTranslateMatrix( tx, ty, tz));
 	//glRotatef(thetaX, 1, 0, 0);
 	rotMatrix_X[5] = getCos(thetaX);
 	rotMatrix_X[6] = getSin(thetaX);
@@ -124,6 +121,8 @@ void reshape(GLsizei width, GLsizei height) {  // GLsizei for non-negative integ
 
 /* Main function: GLUT runs as a console application starting at main() */
 int main(int argc, char** argv) {
+	config = Config();
+	// auto func = std::bind(&Config::mySpecialKey, &config);
 	glutInit(&argc, argv);            // Initialize GLUT
 	glutInitDisplayMode(GLUT_DOUBLE); // Enable double buffered mode
 	glutInitWindowSize(640, 480);   // Set the window's initial width & height

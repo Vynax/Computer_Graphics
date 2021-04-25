@@ -9,11 +9,11 @@
 #include "global.h"
 
 float getSin(float theta) {
-	return sin(theta * M_PI / 180.0);
+	return (float)sin(theta * M_PI / 180.0);
 }
 
 float getCos(float theta) {
-	return cos(theta * M_PI / 180.0);
+	return (float)cos(theta * M_PI / 180.0);
 }
 
 void myKeyboard(unsigned char key, int x, int y) {
@@ -60,16 +60,16 @@ void myKeyboard(unsigned char key, int x, int y) {
 void mySpecialKey(int key, int x, int y) {
 	switch (key) {
 	case GLUT_KEY_LEFT:
-		tx -= 0.2;
+		tx -= 0.2f;
 		break;
 	case GLUT_KEY_RIGHT:
-		tx += 0.2;
+		tx += 0.2f;
 		break;
 	case GLUT_KEY_UP:
-		ty += 0.2;
+		ty += 0.2f;
 		break;
 	case GLUT_KEY_DOWN:
-		ty -= 0.2;
+		ty -= 0.2f;
 		break;
 	default:
 		break;
@@ -85,14 +85,14 @@ void mouseClicks(int button, int state, int x, int y) {     //當按下滑鼠左鍵時會
 
 
 			if (x > glutGet(GLUT_WINDOW_WIDTH) / 2)
-				clickX = x - glutGet(GLUT_WINDOW_WIDTH) / 2;
+				clickX = (float)(x - glutGet(GLUT_WINDOW_WIDTH) / 2);
 			else
-				clickX = -(glutGet(GLUT_WINDOW_WIDTH) / 2 - x);
+				clickX = (float)(-(glutGet(GLUT_WINDOW_WIDTH) / 2 - x));
 
 			if (y > glutGet(GLUT_WINDOW_HEIGHT) / 2)
-				clickY = -(y - glutGet(GLUT_WINDOW_HEIGHT) / 2);
+				clickY = (float)(-(y - glutGet(GLUT_WINDOW_HEIGHT) / 2));
 			else
-				clickY = glutGet(GLUT_WINDOW_HEIGHT) / 2 - y;
+				clickY = (float)(glutGet(GLUT_WINDOW_HEIGHT) / 2 - y);
 
 			clickX = clickX / glutGet(GLUT_WINDOW_WIDTH) * range;
 			clickY = clickY / glutGet(GLUT_WINDOW_HEIGHT) *range;

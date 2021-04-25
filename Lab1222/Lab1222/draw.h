@@ -61,7 +61,7 @@ void draw_Pyramid() {
 void draw_Click(float clickX, float clickY, float clickZ, float radius) {
 	//Set Drawing Color - Will Remain this color until otherwise specified
 
-	glColor3f(0.2, 0.3, 0.5);  //Some type of blue
+	glColor3f(0.2f, 0.3f, 0.5f);  //Some type of blue
 
 	//Draw Circle
 	glBegin(GL_POLYGON);
@@ -76,7 +76,7 @@ void draw_Click(float clickX, float clickY, float clickZ, float radius) {
 	//Notice the correlation between the value and the number of sides
 	//The number of sides is always twice the value given this range
 	for (double i = 0; i < 2 * M_PI; i += M_PI / 24) //<-- Change this Value
-		glVertex3f(clickX + (cos(i) * radius), clickY + (sin(i) * radius), 0.0);
+		glVertex3f( (float)(clickX + (cos(i) * radius)), (float)(clickY + (sin(i) * radius)), 0.0f);
 	glEnd();
 	//Draw Circle
 

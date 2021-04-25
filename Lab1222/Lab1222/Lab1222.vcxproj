@@ -22,6 +22,7 @@
     <ClCompile Include="Lab05_Arbitrary_Rotation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="config.h" />
     <ClInclude Include="draw.h" />
     <ClInclude Include="function.h" />
     <ClInclude Include="global.h" />
