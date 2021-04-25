@@ -9,33 +9,12 @@
 #include <iostream>
 #include <cmath>
 #include "function.h"
-// #include <functional> //without .h
+ // #include <functional> //without .h
 #include "draw.h"
 #include "global.h"
 #include "config.h"
 
 Config config;
-
-GLfloat rotMatrix_X[] = {
-1.0, 0.0, 0.0, 0.0,
-0.0, 1.0, 0.0, 0.0,
-0.0, 0.0, 1.0, 0.0,
-0.0, 0.0, 0.0, 1.0 };
-
-GLfloat rotMatrix_Y[] = {
-1.0, 0.0, 0.0, 0.0,
-0.0, 1.0, 0.0, 0.0,
-0.0, 0.0, 1.0, 0.0,
-0.0, 0.0, 0.0, 1.0 };
-
-GLfloat rotMatrix_Z[] = {
-1.0, 0.0, 0.0, 0.0,
-0.0, 1.0, 0.0, 0.0,
-0.0, 0.0, 1.0, 0.0,
-0.0, 0.0, 0.0, 1.0 };
-
-// float getSin(float);
-// float getCos(float);
 
 /* Initialize OpenGL Graphics */
 void initGL() {
@@ -59,45 +38,27 @@ void display() {
 	//glRotatef(-30, 0, 1, 0);
 	//glRotatef(15, 1, 0, 0);
 
-
-
 	draw_Axis();
 	if (Click)
-		draw_Click(clickX,clickY,clickZ,radius);
+		draw_Click(clickX, clickY, clickZ, radius);
 
 	glLoadIdentity();                  // Reset the model-view matrix
 	gluLookAt(0, 0, 15.0f, 0, 0, 0, 0, 1, 0);
 	//glTranslatef(tx, ty, tz);  // Move left and into the screen
 
-	/*config.translateMatrix[12] = tx;
-	config.translateMatrix[13] = ty;
-	config.translateMatrix[14] = tz;*/
-	glMultMatrixf(config.getTranslateMatrix( tx, ty, tz));
-	//glRotatef(thetaX, 1, 0, 0);
-	rotMatrix_X[5] = getCos(thetaX);
-	rotMatrix_X[6] = getSin(thetaX);
-	rotMatrix_X[9] = -getSin(thetaX);
-	rotMatrix_X[10] = getCos(thetaX);
-	glMultMatrixf(rotMatrix_X);
+	glMultMatrixf(config.getTranslateMatrix(tx, ty, tz));
+	
 
-	rotMatrix_Y[0] = getCos(thetaY);
-	rotMatrix_Y[2] = -getSin(thetaY);
-	rotMatrix_Y[8] = getSin(thetaY);
-	rotMatrix_Y[10] = getCos(thetaY);
-	glMultMatrixf(rotMatrix_Y);
+	glMultMatrixf(config.getRotateX(thetaX));
+	//glRotatef(thetaX, 1, 0, 0);
+
+	glMultMatrixf(config.getRotateY(thetaY));
 	//glRotatef(thetaY, 0, 1, 0);
 
-
-	rotMatrix_Z[0] = getCos(thetaZ);
-	rotMatrix_Z[1] = getSin(thetaZ);
-	rotMatrix_Z[4] = -getSin(thetaZ);
-	rotMatrix_Z[5] = getCos(thetaZ);
-	glMultMatrixf(rotMatrix_Z);
+	glMultMatrixf(config.getRotateZ(thetaZ));
 	//glRotatef(thetaZ, 0, 0, 1);
 
-
 	draw_Pyramid();
-
 
 	glutSwapBuffers();  // Swap the front and back frame buffers (double buffering)
 }
