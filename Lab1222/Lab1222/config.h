@@ -1,6 +1,7 @@
 #pragma once
 
 #include <GL/glut.h>  // GLUT, include glu.h and gl.h
+#include <algorithm>    // std::swap
 
 class Config {
 public:
@@ -48,6 +49,44 @@ public:
 		return translateMatrix;
 	}
 
+	GLfloat *getRotateX(float Cos, float Sin) {
+		rotMatrix_X[5] = Cos;
+		rotMatrix_X[6] = Sin;
+		rotMatrix_X[9] = -Sin;
+		rotMatrix_X[10] = Cos;
+		return rotMatrix_X;
+	}
+
+	void transPose(GLfloat *matrix) {
+		std::swap(matrix[1], matrix[4]);
+		std::swap(matrix[2], matrix[8]);
+		std::swap(matrix[3], matrix[12]);
+		std::swap(matrix[6], matrix[9]);
+		std::swap(matrix[7], matrix[13]);
+		std::swap(matrix[11], matrix[14]);
+	}
+
+	// 0 = translateMatrix; 1 = rotMatrix_X; 2 = rotMatrix_Y; 3 = rotMatrix_Z
+	GLfloat *getMatrix(int which) {
+		switch (which) {
+		case 0:
+			return translateMatrix;
+			break;
+		case 1:
+			return rotMatrix_X;
+			break;
+		case 2:
+			return rotMatrix_Y;
+			break;
+		case 3:
+			return rotMatrix_Z;
+			break;
+		default:
+			break;
+		}
+	}
+
+	// 以下為Lab04以前的Rotate-----------------------------------------
 	GLfloat *getRotateX(float thetaX) {
 		rotMatrix_X[5] = getCos(thetaX);
 		rotMatrix_X[6] = getSin(thetaX);
@@ -73,7 +112,8 @@ public:
 
 		return rotMatrix_Z;
 	}
-
+	// 以上為Lab04以前的Rotate-----------------------------------------
+private:
 	GLfloat *translateMatrix;
 	GLfloat *rotMatrix_X;
 	GLfloat *rotMatrix_Y;
