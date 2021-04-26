@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <GL/glut.h>  // GLUT, include glu.h and gl.h
 #include <algorithm>    // std::swap
@@ -41,7 +41,7 @@ public:
 		delete[] rotMatrix_Y;
 		delete[] rotMatrix_Z;
 	}*/
-
+	// 以下是為了Lab05任意軸旋轉寫的
 	GLfloat *getTranslateMatrix(float tx, float ty, float tz) {
 		translateMatrix[12] = tx;
 		translateMatrix[13] = ty;
@@ -49,6 +49,7 @@ public:
 		return translateMatrix;
 	}
 
+	//任意軸旋轉時只要拿到cos跟sin即可
 	GLfloat *getRotateX(float Cos, float Sin) {
 		rotMatrix_X[5] = Cos;
 		rotMatrix_X[6] = Sin;
@@ -57,13 +58,22 @@ public:
 		return rotMatrix_X;
 	}
 
-	void transPose(GLfloat *matrix) {
-		std::swap(matrix[1], matrix[4]);
-		std::swap(matrix[2], matrix[8]);
-		std::swap(matrix[3], matrix[12]);
-		std::swap(matrix[6], matrix[9]);
-		std::swap(matrix[7], matrix[13]);
-		std::swap(matrix[11], matrix[14]);
+	//轉置矩陣
+	GLfloat *transPose(GLfloat *matrix) {
+		GLfloat tran[16];
+
+		for (int i = 0; i < 16; i++) {
+			tran[i] = matrix[i];
+		}
+
+		std::swap(tran[1], tran[4]);
+		std::swap(tran[2], tran[8]);
+		std::swap(tran[3], tran[12]);
+		std::swap(tran[6], tran[9]);
+		std::swap(tran[7], tran[13]);
+		std::swap(tran[11], tran[14]);
+
+		return tran;
 	}
 
 	// 0 = translateMatrix; 1 = rotMatrix_X; 2 = rotMatrix_Y; 3 = rotMatrix_Z
@@ -86,7 +96,7 @@ public:
 		}
 	}
 
-	// �H�U��Lab04�H�e��Rotate-----------------------------------------
+	// 以下為Lab04以前的Rotate-----------------------------------------
 	GLfloat *getRotateX(float thetaX) {
 		rotMatrix_X[5] = getCos(thetaX);
 		rotMatrix_X[6] = getSin(thetaX);
@@ -112,7 +122,7 @@ public:
 
 		return rotMatrix_Z;
 	}
-	// �H�W��Lab04�H�e��Rotate-----------------------------------------
+	// 以上為Lab04以前的Rotate-----------------------------------------
 private:
 	GLfloat *translateMatrix;
 	GLfloat *rotMatrix_X;

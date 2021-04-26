@@ -1,4 +1,4 @@
-/*
+﻿/*
  * OGL01Shape3D.cpp: 3D Shapes
  */
 
@@ -35,7 +35,7 @@ void display() {
 	// Render a pyramid consists of 4 triangles
 	glLoadIdentity();                  // Reset the model-view matrix
 	gluLookAt(0, 0, 15.0f, 0, 0, 0, 0, 1, 0);
-	//glRotatef(-30, 0, 1, 0);
+	// glRotatef(-30, 0, 1, 0);
 	//glRotatef(15, 1, 0, 0);
 
 	draw_Axis();
@@ -47,7 +47,7 @@ void display() {
 	//glTranslatef(tx, ty, tz);  // Move left and into the screen
 
 	glMultMatrixf(config.getTranslateMatrix(tx, ty, tz));
-	
+
 
 	glMultMatrixf(config.getRotateX(thetaX));
 	//glRotatef(thetaX, 1, 0, 0);
@@ -63,10 +63,14 @@ void display() {
 	glutSwapBuffers();  // Swap the front and back frame buffers (double buffering)
 }
 
+void arbitrary_Rotate() {
+
+}
+
 /* Handler for window re-size event. Called back when the window first appears and
    whenever the window is re-sized with its new width and height */
 void reshape(GLsizei width, GLsizei height) {  // GLsizei for non-negative integer
-   // Compute aspect ratio of the new window
+	// Compute aspect ratio of the new window
 	if (height == 0) height = 1;                // To prevent divide by 0
 	GLfloat aspect = (GLfloat)width / (GLfloat)height;
 

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #define angleX 0
 #define angleY -30
@@ -78,7 +78,7 @@ void mySpecialKey(int key, int x, int y) {
 	glutPostRedisplay();
 }
 
-void mouseClicks(int button, int state, int x, int y) {     //·í«ö¤U·Æ¹«¥ªÁä®É·|°õ¦æ¸Ì­±
+void mouseClicks(int button, int state, int x, int y) {     //ç•¶æŒ‰ä¸‹æ»‘é¼ å·¦éµæ™‚æœƒåŸ·è¡Œè£¡é¢
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
 		//do something
 		if (Click == false) {
