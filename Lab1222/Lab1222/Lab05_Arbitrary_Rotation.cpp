@@ -13,8 +13,10 @@
 #include "draw.h"
 #include "global.h"
 #include "config.h"
+#include "menu.h"
 
 Config config;
+void arbitrary_Rotate(float a, float b, float c);
 
 /* Initialize OpenGL Graphics */
 void initGL() {
@@ -39,23 +41,25 @@ void display() {
 	//glRotatef(15, 1, 0, 0);
 
 	draw_Axis();
-	if (Click)
-		draw_Click(clickX, clickY, clickZ, radius);
 
 	glLoadIdentity();                  // Reset the model-view matrix
 	gluLookAt(0, 0, 15.0f, 0, 0, 0, 0, 1, 0);
 	//glTranslatef(tx, ty, tz);  // Move left and into the screen
+	if (Click) {
+		draw_Click(clickX, clickY, clickZ, radius);
+		arbitrary_Rotate(clickX, clickY, clickZ);
+	}
 
-	glMultMatrixf(config.getTranslateMatrix(tx, ty, tz));
+	//glMultMatrixf(config.getTranslateMatrix(tx, ty, tz));
 
 
-	glMultMatrixf(config.getRotateX(thetaX));
+	//glMultMatrixf(config.getRotateX(thetaX));
 	//glRotatef(thetaX, 1, 0, 0);
 
-	glMultMatrixf(config.getRotateY(thetaY));
+	//glMultMatrixf(config.getRotateY(thetaY));
 	//glRotatef(thetaY, 0, 1, 0);
 
-	glMultMatrixf(config.getRotateZ(thetaZ));
+	//glMultMatrixf(config.getRotateZ(thetaZ));s
 	//glRotatef(thetaZ, 0, 0, 1);
 
 	draw_Pyramid();
@@ -63,8 +67,31 @@ void display() {
 	glutSwapBuffers();  // Swap the front and back frame buffers (double buffering)
 }
 
-void arbitrary_Rotate() {
+//假設忽略Z軸，任意軸旋轉XY平面上的軸
+void arbitrary_Rotate(float a, float b, float c) {
+	float sinx = b / sqrt(pow(b, 2) + pow(c, 2));
+	float cosx = c / sqrt(pow(b, 2) + pow(c, 2));
 
+	float siny = a / sqrt(pow(a, 2) + pow(c, 2));
+	float cosy = (c / sqrt(pow(a, 2) + pow(c, 2)));
+
+	//Rx(theta)
+	GLfloat *matrixX = config.getRotateX(sinx, cosx);
+	glMultMatrixf(matrixX);
+	//Ry(theta)
+	GLfloat *matrixY = config.getRotateY(siny, cosy);
+	glMultMatrixf(matrixY);
+	//Rz
+	thetaZ += 3;
+	glMultMatrixf(config.getRotateZ(thetaZ));
+
+	//Ry^-1(theta)
+	glMultMatrixf(config.getTransPose(matrixY));
+
+	//Rx^-1(theta)
+	glMultMatrixf(config.getTransPose(matrixX));
+
+	std::cout << "arbitrary_Rotate" << std::endl;
 }
 
 /* Handler for window re-size event. Called back when the window first appears and
@@ -98,6 +125,11 @@ int main(int argc, char** argv) {
 	glutKeyboardFunc(myKeyboard);
 	glutSpecialFunc(mySpecialKey);
 	glutMouseFunc(mouseClicks);
+
+	// 建立右建選單
+	buildPopupMenu();
+	glutAttachMenu(GLUT_RIGHT_BUTTON);
+
 	initGL();                       // Our own OpenGL initialization
 	glutMainLoop();                 // Enter the infinite event-processing loop
 	return 0;

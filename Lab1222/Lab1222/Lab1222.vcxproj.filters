@@ -15,11 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lab05_Arbitrary_Rotation.cpp">
-      <Filter>來源檔案</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="function.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
@@ -32,5 +27,13 @@
     <ClInclude Include="config.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
+    <ClInclude Include="menu.h">
+      <Filter>來源檔案</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Lab05_Arbitrary_Rotation.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

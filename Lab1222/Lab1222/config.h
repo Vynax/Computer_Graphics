@@ -41,7 +41,7 @@ public:
 		delete[] rotMatrix_Y;
 		delete[] rotMatrix_Z;
 	}*/
-	// 以下是為了Lab05任意軸旋轉寫的
+	// 以下是為了Lab05任意軸旋轉寫的-----------------------------------------
 	GLfloat *getTranslateMatrix(float tx, float ty, float tz) {
 		translateMatrix[12] = tx;
 		translateMatrix[13] = ty;
@@ -50,7 +50,7 @@ public:
 	}
 
 	//任意軸旋轉時只要拿到cos跟sin即可
-	GLfloat *getRotateX(float Cos, float Sin) {
+	GLfloat *getRotateX(float Sin, float Cos) {
 		rotMatrix_X[5] = Cos;
 		rotMatrix_X[6] = Sin;
 		rotMatrix_X[9] = -Sin;
@@ -58,8 +58,17 @@ public:
 		return rotMatrix_X;
 	}
 
+	GLfloat *getRotateY(float Sin, float Cos) {
+		rotMatrix_Y[0] = Cos;
+		rotMatrix_Y[2] = -Sin;
+		rotMatrix_Y[8] = Sin;
+		rotMatrix_Y[10] = Cos;
+
+		return rotMatrix_Y;
+	}
+
 	//轉置矩陣
-	GLfloat *transPose(GLfloat *matrix) {
+	GLfloat *getTransPose(GLfloat *matrix) {
 		GLfloat tran[16];
 
 		for (int i = 0; i < 16; i++) {
