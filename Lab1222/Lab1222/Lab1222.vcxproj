@@ -26,7 +26,7 @@
     <ClInclude Include="menu.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="107310305_Lab05_Arbitrary_Rotation.cpp" />
+    <ClCompile Include="Lab05_Arbitrary_Rotation.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

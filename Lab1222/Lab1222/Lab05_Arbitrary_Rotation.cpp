@@ -15,7 +15,6 @@
 #include "config.h"
 #include "menu.h"
 
-Config config;
 void arbitrary_Rotate(float a, float b, float c);
 
 /* Initialize OpenGL Graphics */
@@ -47,19 +46,19 @@ void display() {
 	//glTranslatef(tx, ty, tz);  // Move left and into the screen
 
 	draw_Click(clickX, clickY, clickZ, radius);
-	arbitrary_Rotate(clickX, clickY, clickZ);
+	//arbitrary_Rotate(clickX, clickY, clickZ);
 
 
-	//glMultMatrixf(config.getTranslateMatrix(tx, ty, tz));
+	glMultMatrixf(config.getTranslateMatrix(tx, ty, tz));
 
 
-	//glMultMatrixf(config.getRotateX(thetaX));
+	glMultMatrixf(config.getRotateX(thetaX));
 	//glRotatef(thetaX, 1, 0, 0);
 
-	//glMultMatrixf(config.getRotateY(thetaY));
+	glMultMatrixf(config.getRotateY(thetaY));
 	//glRotatef(thetaY, 0, 1, 0);
 
-	//glMultMatrixf(config.getRotateZ(thetaZ));s
+	glMultMatrixf(config.getRotateZ(thetaZ));
 	//glRotatef(thetaZ, 0, 0, 1);
 
 	draw_Pyramid();
@@ -108,7 +107,10 @@ void reshape(GLsizei width, GLsizei height) {  // GLsizei for non-negative integ
 	glMatrixMode(GL_PROJECTION);  // To operate on the Projection matrix
 	glLoadIdentity();             // Reset
 	// Enable perspective projection with fovy, aspect, zNear and zFar
-	gluPerspective(45.0f, aspect, 0.1f, 100.0f);
+	// gluPerspective(45.0f, aspect, 0.1f, 100.0f);
+	glOrtho(-300, 300, -300, 300, -300, 300);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 }
 
 /* Main function: GLUT runs as a console application starting at main() */
@@ -117,7 +119,7 @@ int main(int argc, char** argv) {
 	// auto func = std::bind(&Config::mySpecialKey, &config);
 	glutInit(&argc, argv);            // Initialize GLUT
 	glutInitDisplayMode(GLUT_DOUBLE); // Enable double buffered mode
-	glutInitWindowSize(640, 480);   // Set the window's initial width & height
+	glutInitWindowSize(800, 800);   // Set the window's initial width & height
 	glutInitWindowPosition(50, 50); // Position the window's initial top-left corner
 	glutCreateWindow(title);          // Create window with the given title
 	glutDisplayFunc(display);       // Register callback handler for window re-paint event

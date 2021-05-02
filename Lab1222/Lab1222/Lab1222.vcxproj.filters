@@ -32,7 +32,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="107310305_Lab05_Arbitrary_Rotation.cpp">
+    <ClCompile Include="Lab05_Arbitrary_Rotation.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>

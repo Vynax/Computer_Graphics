@@ -3,6 +3,9 @@
 #include <GL/glut.h>  // GLUT, include glu.h and gl.h
 #include <algorithm>    // std::swap
 
+float getSin(float);
+float getCos(float);
+
 class Config {
 public:
 	Config() {
