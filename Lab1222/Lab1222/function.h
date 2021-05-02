@@ -81,27 +81,27 @@ void mySpecialKey(int key, int x, int y) {
 void mouseClicks(int button, int state, int x, int y) {     //當按下滑鼠左鍵時會執行裡面
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
 		//do something
-		if (Click == false) {
+		// if (Click == false) {
 
 
-			if (x > glutGet(GLUT_WINDOW_WIDTH) / 2)
-				clickX = (float)(x - glutGet(GLUT_WINDOW_WIDTH) / 2);
-			else
-				clickX = (float)(-(glutGet(GLUT_WINDOW_WIDTH) / 2 - x));
+		if (x > glutGet(GLUT_WINDOW_WIDTH) / 2)
+			clickX = (float)(x - glutGet(GLUT_WINDOW_WIDTH) / 2);
+		else
+			clickX = (float)(-(glutGet(GLUT_WINDOW_WIDTH) / 2 - x));
 
-			if (y > glutGet(GLUT_WINDOW_HEIGHT) / 2)
-				clickY = (float)(-(y - glutGet(GLUT_WINDOW_HEIGHT) / 2));
-			else
-				clickY = (float)(glutGet(GLUT_WINDOW_HEIGHT) / 2 - y);
+		if (y > glutGet(GLUT_WINDOW_HEIGHT) / 2)
+			clickY = (float)(-(y - glutGet(GLUT_WINDOW_HEIGHT) / 2));
+		else
+			clickY = (float)(glutGet(GLUT_WINDOW_HEIGHT) / 2 - y);
 
-			clickX = clickX / glutGet(GLUT_WINDOW_WIDTH) * range;
-			clickY = clickY / glutGet(GLUT_WINDOW_HEIGHT) *range;
+		clickX = clickX / glutGet(GLUT_WINDOW_WIDTH) * range;
+		clickY = clickY / glutGet(GLUT_WINDOW_HEIGHT) *range;
 
-			std::cout << "Width:" << glutGet(GLUT_WINDOW_WIDTH) << "Height:" << glutGet(GLUT_WINDOW_HEIGHT) << "x:" << x << "y:" << y;
-			std::cout << "ClickX:" << clickX << "ClickY:" << clickY << std::endl;
+		std::cout << "Width:" << glutGet(GLUT_WINDOW_WIDTH) << "Height:" << glutGet(GLUT_WINDOW_HEIGHT) << "x:" << x << "y:" << y;
+		std::cout << "ClickX:" << clickX << "ClickY:" << clickY << std::endl;
 
 
-			Click = true;
-		}
+		//Click = true;
+	//}
 	}
 }

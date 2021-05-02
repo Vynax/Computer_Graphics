@@ -45,10 +45,10 @@ void display() {
 	glLoadIdentity();                  // Reset the model-view matrix
 	gluLookAt(0, 0, 15.0f, 0, 0, 0, 0, 1, 0);
 	//glTranslatef(tx, ty, tz);  // Move left and into the screen
-	if (Click) {
-		draw_Click(clickX, clickY, clickZ, radius);
-		arbitrary_Rotate(clickX, clickY, clickZ);
-	}
+
+	draw_Click(clickX, clickY, clickZ, radius);
+	arbitrary_Rotate(clickX, clickY, clickZ);
+
 
 	//glMultMatrixf(config.getTranslateMatrix(tx, ty, tz));
 
