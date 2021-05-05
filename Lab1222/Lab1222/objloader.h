@@ -17,6 +17,9 @@ public:
 	void Draw();//繪製函數
 
 	float minX, maxX, minY, maxY, minZ, maxZ;
+	float midX, midY, midZ;
+
+	float lengthX, lengthY, lengthZ;
 private:
 	std::vector<std::vector<GLfloat>> v;//存放頂點(x,y,z)座標
 	std::vector<std::vector<GLint>> f;//存放面的三個頂點索引

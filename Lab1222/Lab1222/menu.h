@@ -13,6 +13,7 @@ void render_Mode_Menu(int);
 void color_Mode_Menu(int);
 void bounding_Box_Menu(int);
 void axis_Menu(int);
+void Change_Object(int);
 
 int buildPopupMenu(void)
 {
@@ -133,17 +134,32 @@ void object_Menu(int option) {
 	switch (option) {
 	case 1:
 		std::cout << "Gourd" << std::endl;
+		Change_Object(1);
+		glutPostRedisplay();
 		break;
 	case 2:
 		std::cout << "Lamp" << std::endl;
+		Change_Object(2);
+		glutPostRedisplay();
 		break;
 	case 3:
 		std::cout << "Octahedron" << std::endl;
+		Change_Object(3);
+		glutPostRedisplay();
 		break;
 	case 4:
 		std::cout << "Teapot" << std::endl;
+		Change_Object(4);
+		glutPostRedisplay();
 		break;
 	default:
 		break;
 	}
+}
+
+void Change_Object(int which) {
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	config.setObj_Draw(which);
+	glMatrixMode(GL_MODELVIEW);
 }

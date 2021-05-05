@@ -16,3 +16,4 @@ static float radius = 0.2f;
 static bool Click = false;
 static Config config;
 static ObjLoader lamp;
+static ObjLoader teapot;

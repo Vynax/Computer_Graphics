@@ -19,6 +19,7 @@
 void arbitrary_Rotate(float a, float b, float c);
 
 /* Initialize OpenGL Graphics */
+
 void initGL() {
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
 	glClearDepth(1.0f);                   // Set background depth to farthest
@@ -41,12 +42,12 @@ void display() {
 	//glRotatef(15, 1, 0, 0);
 
 	draw_Axis();
+	draw_Click(clickX, clickY, clickZ, radius);
 
 	glLoadIdentity();                  // Reset the model-view matrix
 	gluLookAt(0, 0, 15.0f, 0, 0, 0, 0, 1, 0);
 	//glTranslatef(tx, ty, tz);  // Move left and into the screen
 
-	draw_Click(clickX, clickY, clickZ, radius);
 	//arbitrary_Rotate(clickX, clickY, clickZ);
 
 
@@ -63,7 +64,8 @@ void display() {
 	//glRotatef(thetaZ, 0, 0, 1);
 
 	//draw_Pyramid();
-	lamp.Draw();
+	//lamp.Draw();
+	config.Draw();
 
 	glutSwapBuffers();  // Swap the front and back frame buffers (double buffering)
 }
@@ -110,15 +112,28 @@ void reshape(GLsizei width, GLsizei height) {  // GLsizei for non-negative integ
 	glLoadIdentity();             // Reset
 	// Enable perspective projection with fovy, aspect, zNear and zFar
 	// gluPerspective(45.0f, aspect, 0.1f, 100.0f);
-	glOrtho(-25, 25, -25, 25, -25, 25);
+	float lengthX = config.lengthX;
+	float lengthY = config.lengthY;
+	float lengthZ = config.lengthZ;
+
+	auto max_array = { lengthX,lengthY,lengthZ };
+	float max = *std::max_element(max_array.begin(), max_array.end());
+
+	std::cout << "max:" << max << std::endl;
+
+	glOrtho(-max, max, -max, max, -max, max + 15);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
 
 /* Main function: GLUT runs as a console application starting at main() */
 int main(int argc, char** argv) {
-	config = Config();
-	lamp = ObjLoader("lamp.obj");
+	//lamp = ObjLoader("lamp.obj");
+	//config.SetObjectXYZ(&lamp);
+	//teapot = ObjLoader("teapot.obj");
+	//config.SetObjectXYZ(&teapot);
+
+
 	// auto func = std::bind(&Config::mySpecialKey, &config);
 	glutInit(&argc, argv);            // Initialize GLUT
 	glutInitDisplayMode(GLUT_DOUBLE); // Enable double buffered mode

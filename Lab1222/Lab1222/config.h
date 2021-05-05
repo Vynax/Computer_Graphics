@@ -2,6 +2,8 @@
 
 #include <GL/glut.h>  // GLUT, include glu.h and gl.h
 #include <algorithm>    // std::swap
+#include <cmath>		// abs
+#include "objloader.h"
 
 float getSin(float);
 float getCos(float);
@@ -37,6 +39,13 @@ public:
 			0.0, 0.0, 1.0, 0.0,
 			0.0, 0.0, 0.0, 1.0
 		};
+
+		obj.push_back(ObjLoader("gourd.obj"));
+		obj.push_back(ObjLoader("lamp.obj"));
+		obj.push_back(ObjLoader("octahedron.obj"));
+		obj.push_back(ObjLoader("teapot.obj"));
+
+		setObj_Draw(4);
 	}
 	/*~Config() {
 		delete[] translateMatrix;
@@ -135,9 +144,54 @@ public:
 		return rotMatrix_Z;
 	}
 	// 以上為Lab04以前的Rotate-----------------------------------------
+
+	void SetObjectXYZ(ObjLoader *ol) {
+
+		midX = ol->midX;
+		midY = ol->midY;
+		midZ = ol->midZ;
+
+		lengthX = ol->lengthX;
+		lengthY = ol->lengthY;
+		lengthZ = ol->lengthZ;
+
+		std::cout << std::endl;
+		std::cout << "config:" << std::endl;
+		std::cout << "midX:" << midX << std::endl;
+		std::cout << "midY:" << midY << std::endl;
+		std::cout << "midZ:" << midZ << std::endl;
+
+		std::cout << "lengthX:" << lengthX << std::endl;
+		std::cout << "lengthY:" << lengthY << std::endl;
+		std::cout << "lengthZ:" << lengthZ << std::endl;
+
+		auto max_array = { lengthX,lengthY,lengthZ };
+		float max = *std::max_element(max_array.begin(), max_array.end());
+
+		std::cout << "max:" << max << std::endl;
+
+		//glLoadIdentity();             // Reset
+		glOrtho(-max, max, -max, max, -max, max + 15);
+	}
+
+	void Draw() {
+		obj[obj_draw].Draw();
+	}
+
+	void setObj_Draw(int which) {
+		obj_draw = which - 1;
+		SetObjectXYZ(&obj[obj_draw]);
+	}
+
+	float midX, midY, midZ;
+
+	float lengthX, lengthY, lengthZ;
 private:
 	GLfloat *translateMatrix;
 	GLfloat *rotMatrix_X;
 	GLfloat *rotMatrix_Y;
 	GLfloat *rotMatrix_Z;
+
+	int obj_draw;
+	std::vector <ObjLoader> obj;
 };
