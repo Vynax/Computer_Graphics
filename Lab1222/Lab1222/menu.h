@@ -86,9 +86,13 @@ void bounding_Box_Menu(int option) {
 	switch (option) {
 	case 1:
 		std::cout << "On" << std::endl;
+		config.Set_Bounding_Box(true);
+		glutPostRedisplay();
 		break;
 	case 2:
 		std::cout << "Off" << std::endl;
+		config.Set_Bounding_Box(false);
+		glutPostRedisplay();
 		break;
 	default:
 		break;
@@ -112,17 +116,20 @@ void render_Mode_Menu(int option) {
 	switch (option) {
 	case 1:
 		std::cout << "Point" << std::endl;
-		glPolygonMode(GL_FRONT, GL_POINT);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+		config.Set_Render_Mode(1);
 		glutPostRedisplay();
 		break;
 	case 2:
 		std::cout << "Line" << std::endl;
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		config.Set_Render_Mode(2);
 		glutPostRedisplay();
 		break;
 	case 3:
 		std::cout << "Face" << std::endl;
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glPolygonMode(GL_FRONT, GL_FILL);
+		config.Set_Render_Mode(3);
 		glutPostRedisplay();
 		break;
 	default:

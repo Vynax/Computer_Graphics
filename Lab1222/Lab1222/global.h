@@ -15,5 +15,5 @@ static float clickX = 0, clickY = 0, clickZ = 0;
 static float radius = 0.2f;
 static bool Click = false;
 static Config config;
-static ObjLoader lamp;
-static ObjLoader teapot;
+//static ObjLoader lamp;
+//static ObjLoader teapot;

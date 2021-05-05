@@ -108,6 +108,8 @@ ObjLoader::ObjLoader(std::string filename)
 	std::cout << "lengthX:" << lengthX << std::endl;
 	std::cout << "lengthY:" << lengthY << std::endl;
 	std::cout << "lengthZ:" << lengthZ << std::endl;
+
+	draw_BoundingBox = true;
 }
 
 void ObjLoader::Draw()
@@ -129,5 +131,46 @@ void ObjLoader::Draw()
 		}
 		glEnd();
 	}
-	std::cout << "obj draw:" << std::endl;
+	//std::cout << "obj draw:" << std::endl;
+
+
+	//畫六面的框框，偷懶只畫五個面，第六個面的線剛好都有
+	if (draw_BoundingBox) {
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+		glBegin(GL_POLYGON);
+		glVertex3f(minX, maxY, minZ);
+		glVertex3f(maxX, maxY, minZ);
+		glVertex3f(maxX, minY, minZ);
+		glVertex3f(minX, minY, minZ);
+		glEnd();
+
+		glBegin(GL_POLYGON);
+		glVertex3f(maxX, maxY, minZ);
+		glVertex3f(maxX, minY, minZ);
+		glVertex3f(maxX, minY, maxZ);
+		glVertex3f(maxX, maxY, maxZ);
+		glEnd();
+
+		glBegin(GL_POLYGON);
+		glVertex3f(minX, maxY, minZ);
+		glVertex3f(maxX, maxY, minZ);
+		glVertex3f(maxX, maxY, maxZ);
+		glVertex3f(minX, maxY, maxZ);
+		glEnd();
+
+		glBegin(GL_POLYGON);
+		glVertex3f(minX, maxY, minZ);
+		glVertex3f(minX, maxY, maxZ);
+		glVertex3f(minX, minY, maxZ);
+		glVertex3f(minX, minY, minZ);
+		glEnd();
+
+		glBegin(GL_POLYGON);
+		glVertex3f(minX, maxY, maxZ);
+		glVertex3f(maxX, maxY, maxZ);
+		glVertex3f(maxX, minY, maxZ);
+		glVertex3f(minX, minY, maxZ);
+		glEnd();
+	}
 }

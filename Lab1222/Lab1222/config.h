@@ -46,6 +46,7 @@ public:
 		obj.push_back(ObjLoader("teapot.obj"));
 
 		setObj_Draw(4);
+		Set_Render_Mode(2);
 	}
 	/*~Config() {
 		delete[] translateMatrix;
@@ -175,12 +176,31 @@ public:
 	}
 
 	void Draw() {
+		switch (render_Mode) {
+		case 1:
+			glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+			break;
+		case 2:
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+			break;
+		case 3:
+			glPolygonMode(GL_FRONT, GL_FILL);
+			break;
+		}
 		obj[obj_draw].Draw();
 	}
 
 	void setObj_Draw(int which) {
 		obj_draw = which - 1;
 		SetObjectXYZ(&obj[obj_draw]);
+	}
+
+	void Set_Render_Mode(int mode) {
+		render_Mode = mode;
+	}
+
+	void Set_Bounding_Box(bool OnOrOff) {
+		obj[obj_draw].draw_BoundingBox = OnOrOff;
 	}
 
 	float midX, midY, midZ;
@@ -192,6 +212,7 @@ private:
 	GLfloat *rotMatrix_Y;
 	GLfloat *rotMatrix_Z;
 
+	int render_Mode;
 	int obj_draw;
 	std::vector <ObjLoader> obj;
 };
