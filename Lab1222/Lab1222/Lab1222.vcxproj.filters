@@ -30,9 +30,15 @@
     <ClInclude Include="menu.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
+    <ClInclude Include="objloader.h">
+      <Filter>來源檔案</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lab05_Arbitrary_Rotation.cpp">
+    <ClCompile Include="Lab07_Midterm_ObjParser.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="objloader.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>

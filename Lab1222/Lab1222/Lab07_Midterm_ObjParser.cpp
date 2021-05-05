@@ -14,6 +14,7 @@
 #include "global.h"
 #include "config.h"
 #include "menu.h"
+#include "objloader.h"
 
 void arbitrary_Rotate(float a, float b, float c);
 
@@ -61,7 +62,8 @@ void display() {
 	glMultMatrixf(config.getRotateZ(thetaZ));
 	//glRotatef(thetaZ, 0, 0, 1);
 
-	draw_Pyramid();
+	//draw_Pyramid();
+	lamp.Draw();
 
 	glutSwapBuffers();  // Swap the front and back frame buffers (double buffering)
 }
@@ -108,7 +110,7 @@ void reshape(GLsizei width, GLsizei height) {  // GLsizei for non-negative integ
 	glLoadIdentity();             // Reset
 	// Enable perspective projection with fovy, aspect, zNear and zFar
 	// gluPerspective(45.0f, aspect, 0.1f, 100.0f);
-	glOrtho(-300, 300, -300, 300, -300, 300);
+	glOrtho(-25, 25, -25, 25, -25, 25);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
@@ -116,6 +118,7 @@ void reshape(GLsizei width, GLsizei height) {  // GLsizei for non-negative integ
 /* Main function: GLUT runs as a console application starting at main() */
 int main(int argc, char** argv) {
 	config = Config();
+	lamp = ObjLoader("lamp.obj");
 	// auto func = std::bind(&Config::mySpecialKey, &config);
 	glutInit(&argc, argv);            // Initialize GLUT
 	glutInitDisplayMode(GLUT_DOUBLE); // Enable double buffered mode

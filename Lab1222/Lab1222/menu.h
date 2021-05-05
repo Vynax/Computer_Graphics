@@ -18,9 +18,10 @@ int buildPopupMenu(void)
 {
 	int menu, obj_Menu, render_mode_Menu, color_mode_Menu, bounding_box_Menu, ax_Menu;
 	obj_Menu = glutCreateMenu(object_Menu);
-	glutAddMenuEntry("Cube", 1);
-	glutAddMenuEntry("Teddy bear", 2);
-	glutAddMenuEntry("Lamp", 3);
+	glutAddMenuEntry("Gourd", 1);
+	glutAddMenuEntry("Lamp", 2);
+	glutAddMenuEntry("Octahedron", 3);
+	glutAddMenuEntry("Teapot", 4);
 	render_mode_Menu = glutCreateMenu(render_Mode_Menu);
 	glutAddMenuEntry("Point", 1);
 	glutAddMenuEntry("Line", 2);
@@ -110,12 +111,18 @@ void render_Mode_Menu(int option) {
 	switch (option) {
 	case 1:
 		std::cout << "Point" << std::endl;
+		glPolygonMode(GL_FRONT, GL_POINT);
+		glutPostRedisplay();
 		break;
 	case 2:
 		std::cout << "Line" << std::endl;
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glutPostRedisplay();
 		break;
 	case 3:
 		std::cout << "Face" << std::endl;
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glutPostRedisplay();
 		break;
 	default:
 		break;
@@ -125,13 +132,16 @@ void render_Mode_Menu(int option) {
 void object_Menu(int option) {
 	switch (option) {
 	case 1:
-		std::cout << "Cube" << std::endl;
+		std::cout << "Gourd" << std::endl;
 		break;
 	case 2:
-		std::cout << "Teddy bear" << std::endl;
+		std::cout << "Lamp" << std::endl;
 		break;
 	case 3:
-		std::cout << "Lamp" << std::endl;
+		std::cout << "Octahedron" << std::endl;
+		break;
+	case 4:
+		std::cout << "Teapot" << std::endl;
 		break;
 	default:
 		break;
