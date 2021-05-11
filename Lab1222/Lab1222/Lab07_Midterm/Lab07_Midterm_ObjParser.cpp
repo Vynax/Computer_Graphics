@@ -15,6 +15,8 @@
 #include "config.h"
 #include "menu.h"
 #include "objloader.h"
+#include <cstdlib> /* 亂數相關函數 */
+#include <ctime>   /* 時間相關函數 */
 
 void arbitrary_Rotate(float a, float b, float c);
 
@@ -133,7 +135,7 @@ int main(int argc, char** argv) {
 	//teapot = ObjLoader("teapot.obj");
 	//config.SetObjectXYZ(&teapot);
 
-
+	srand(time(NULL));
 	// auto func = std::bind(&Config::mySpecialKey, &config);
 	glutInit(&argc, argv);            // Initialize GLUT
 	glutInitDisplayMode(GLUT_DOUBLE); // Enable double buffered mode

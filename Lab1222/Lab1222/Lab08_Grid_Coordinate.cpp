@@ -54,18 +54,41 @@ void display() {
 	glMultMatrixf(config.getTranslateMatrix(tx, ty, tz));
 
 
-	glMultMatrixf(config.getRotateX(thetaX));
+	//glMultMatrixf(config.getRotateX(thetaX));
 	//glRotatef(thetaX, 1, 0, 0);
 
-	glMultMatrixf(config.getRotateY(thetaY));
+	//glMultMatrixf(config.getRotateY(thetaY));
 	//glRotatef(thetaY, 0, 1, 0);
 
 	glMultMatrixf(config.getRotateZ(thetaZ));
 	//glRotatef(thetaZ, 0, 0, 1);
 
 	//draw_Pyramid();
+
+	//glLoadIdentity();
+
+	float lineHDistance = 20.0;
+	float lineVDistance = 20.0;
+
+	glColor3f(1.0f, 1.0f, 1.0f); // White (RGB)
+
+	for (float x = -config.orthoX; x <= config.orthoX; x += lineHDistance)
+	{
+		glBegin(GL_LINES);
+		glVertex3f(x, -config.orthoY, 0.0f);
+		glVertex3f(x, config.orthoY, 0.0f);
+		glEnd();
+	}
+	for (float y = -config.orthoY; y <= config.orthoY; y += lineVDistance)
+	{
+		glBegin(GL_LINES);
+		glVertex3f(-config.orthoX, y, 0.0f);
+		glVertex3f(config.orthoX, y, 0.0f);
+		glEnd();
+	}
+
 	//lamp.Draw();
-	config.Draw();
+	//config.Draw();
 
 	glutSwapBuffers();  // Swap the front and back frame buffers (double buffering)
 }
@@ -121,7 +144,9 @@ void reshape(GLsizei width, GLsizei height) {  // GLsizei for non-negative integ
 
 	std::cout << "max:" << max << std::endl;
 
-	glOrtho(-max, max, -max, max, -max, max + 15);
+	config.Set_Ortho_Width_Height(300, 300, 300);
+
+	glOrtho(-config.orthoX, config.orthoX, -config.orthoY, config.orthoY, -config.orthoZ, config.orthoZ);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }

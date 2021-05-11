@@ -203,9 +203,18 @@ public:
 		obj[obj_draw].draw_BoundingBox = OnOrOff;
 	}
 
+	void Set_Ortho_Width_Height(GLfloat X, GLfloat Y, GLfloat Z) {
+		orthoX = X;
+		orthoY = Y;
+		orthoZ = Z;
+	}
+
 	float midX, midY, midZ;
 
 	float lengthX, lengthY, lengthZ;
+	GLfloat orthoX;
+	GLfloat orthoY;
+	GLfloat orthoZ;
 private:
 	GLfloat *translateMatrix;
 	GLfloat *rotMatrix_X;

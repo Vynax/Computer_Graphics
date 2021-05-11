@@ -203,6 +203,10 @@ public:
 		obj[obj_draw].draw_BoundingBox = OnOrOff;
 	}
 
+	void Set_Random_Color(bool b) {
+		obj[obj_draw].random_Color = b;
+	}
+
 	float midX, midY, midZ;
 
 	float lengthX, lengthY, lengthZ;

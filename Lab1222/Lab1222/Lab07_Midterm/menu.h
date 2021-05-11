@@ -103,9 +103,13 @@ void color_Mode_Menu(int option) {
 	switch (option) {
 	case 1:
 		std::cout << "Single Color" << std::endl;
+		config.Set_Random_Color(false);
+		glutPostRedisplay();
 		break;
 	case 2:
 		std::cout << "Random Colors" << std::endl;
+		config.Set_Random_Color(true);
+		glutPostRedisplay();
 		break;
 	default:
 		break;
