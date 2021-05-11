@@ -47,6 +47,8 @@ public:
 
 		setObj_Draw(4);
 		Set_Render_Mode(2);
+		gridWidth = 20.0;
+		gridHeight = 20.0;
 	}
 	/*~Config() {
 		delete[] translateMatrix;
@@ -215,6 +217,8 @@ public:
 	GLfloat orthoX;
 	GLfloat orthoY;
 	GLfloat orthoZ;
+	GLfloat gridWidth;
+	GLfloat gridHeight;
 private:
 	GLfloat *translateMatrix;
 	GLfloat *rotMatrix_X;

@@ -15,30 +15,30 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Lab07_Midterm\config.h">
+    <ClInclude Include="config.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
-    <ClInclude Include="Lab07_Midterm\draw.h">
+    <ClInclude Include="draw.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
-    <ClInclude Include="Lab07_Midterm\function.h">
+    <ClInclude Include="function.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
-    <ClInclude Include="Lab07_Midterm\global.h">
+    <ClInclude Include="global.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
-    <ClInclude Include="Lab07_Midterm\menu.h">
+    <ClInclude Include="menu.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
-    <ClInclude Include="Lab07_Midterm\objloader.h">
+    <ClInclude Include="objloader.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lab07_Midterm\Lab07_Midterm_ObjParser.cpp">
+    <ClCompile Include="Lab08_Grid_Coordinate.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
-    <ClCompile Include="Lab07_Midterm\objloader.cpp">
+    <ClCompile Include="objloader.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>

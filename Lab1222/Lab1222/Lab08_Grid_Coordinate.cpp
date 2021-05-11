@@ -51,7 +51,7 @@ void display() {
 	//arbitrary_Rotate(clickX, clickY, clickZ);
 
 
-	glMultMatrixf(config.getTranslateMatrix(tx, ty, tz));
+	//glMultMatrixf(config.getTranslateMatrix(tx, ty, tz));
 
 
 	//glMultMatrixf(config.getRotateX(thetaX));
@@ -60,7 +60,7 @@ void display() {
 	//glMultMatrixf(config.getRotateY(thetaY));
 	//glRotatef(thetaY, 0, 1, 0);
 
-	glMultMatrixf(config.getRotateZ(thetaZ));
+	//glMultMatrixf(config.getRotateZ(thetaZ));
 	//glRotatef(thetaZ, 0, 0, 1);
 
 	//draw_Pyramid();
@@ -72,14 +72,14 @@ void display() {
 
 	glColor3f(1.0f, 1.0f, 1.0f); // White (RGB)
 
-	for (float x = -config.orthoX; x <= config.orthoX; x += lineHDistance)
+	for (float x = -config.orthoX; x <= config.orthoX; x += config.gridWidth)
 	{
 		glBegin(GL_LINES);
 		glVertex3f(x, -config.orthoY, 0.0f);
 		glVertex3f(x, config.orthoY, 0.0f);
 		glEnd();
 	}
-	for (float y = -config.orthoY; y <= config.orthoY; y += lineVDistance)
+	for (float y = -config.orthoY; y <= config.orthoY; y += config.gridHeight)
 	{
 		glBegin(GL_LINES);
 		glVertex3f(-config.orthoX, y, 0.0f);
@@ -87,6 +87,25 @@ void display() {
 		glEnd();
 	}
 
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+	int x = (clickX / config.gridWidth);
+	int y = (clickY / config.gridHeight);
+
+	glPolygonMode(GL_FRONT, GL_FILL);
+	glBegin(GL_POLYGON);
+
+	if (clickX < 0)
+		x = x - 1;
+	if (clickY < 0)
+		y = y - 1;
+
+	glVertex3f(x*config.gridWidth, y*config.gridHeight, 0.0f);
+	glVertex3f(x*config.gridWidth + config.gridWidth, y*config.gridHeight, 0.0f);
+	glVertex3f(x*config.gridWidth + config.gridWidth, y*config.gridHeight + config.gridHeight, 0.0f);
+	glVertex3f(x*config.gridWidth, y*config.gridHeight + config.gridHeight, 0.0f);
+
+	glEnd();
 	//lamp.Draw();
 	//config.Draw();
 
