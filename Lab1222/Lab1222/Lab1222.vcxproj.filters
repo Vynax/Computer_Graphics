@@ -15,16 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="function.h">
+    <ClInclude Include="config.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
     <ClInclude Include="draw.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
-    <ClInclude Include="global.h">
+    <ClInclude Include="function.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
-    <ClInclude Include="config.h">
+    <ClInclude Include="global.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
     <ClInclude Include="menu.h">
