@@ -21,7 +21,6 @@ public:
 
 	float lengthX, lengthY, lengthZ;
 	bool draw_BoundingBox;
-	bool random_Color;
 private:
 	std::vector<std::vector<GLfloat>> v;//存放頂點(x,y,z)座標
 	std::vector<std::vector<GLint>> f;//存放面的三個頂點索引

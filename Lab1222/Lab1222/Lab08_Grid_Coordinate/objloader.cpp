@@ -3,7 +3,6 @@
 #include <fstream>
 #include <sstream>
 #include <filesystem>
-#include <cstdlib> /* 亂數相關函數 */
 
 ObjLoader::ObjLoader(std::string filename)
 {
@@ -84,8 +83,6 @@ ObjLoader::ObjLoader(std::string filename)
 		}
 
 		//std::cout << "reading...." << std::endl;
-
-		random_Color = false;
 	}
 	file.close();
 	std::cout << "v size : " << v.size() << "f size:" << f.size() << std::endl;
@@ -121,14 +118,7 @@ void ObjLoader::Draw()
 	glColor3f(255.0f, 255.0f, 255.0f);
 	for (int i = 0; i < f.size(); i++) {
 		vertex temp;
-		if (random_Color) {
-			float r = (float)rand() / (RAND_MAX + 1.0);
-			float g = (float)rand() / (RAND_MAX + 1.0);
-			float b = (float)rand() / (RAND_MAX + 1.0);
-			glColor3f(r, g, b);
-		}
-		else
-			glColor3f(1.0, 1.0, 1.0);
+
 		glBegin(GL_POLYGON);
 
 		for (int j = 0; j < f[i].size(); j++) {
