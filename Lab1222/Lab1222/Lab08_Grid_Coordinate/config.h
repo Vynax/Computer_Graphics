@@ -3,7 +3,7 @@
 #include <GL/glut.h>  // GLUT, include glu.h and gl.h
 #include <algorithm>    // std::swap
 #include <cmath>		// abs
-#include "objloader.h"
+//#include "objloader.h"
 
 float getSin(float);
 float getCos(float);
@@ -40,15 +40,9 @@ public:
 			0.0, 0.0, 0.0, 1.0
 		};
 
-		obj.push_back(ObjLoader("gourd.obj"));
-		obj.push_back(ObjLoader("lamp.obj"));
-		obj.push_back(ObjLoader("octahedron.obj"));
-		obj.push_back(ObjLoader("teapot.obj"));
-
-		setObj_Draw(4);
-		Set_Render_Mode(2);
 		gridWidth = 20.0;
 		gridHeight = 20.0;
+		clickX = clickY = clickZ = 0;
 	}
 	/*~Config() {
 		delete[] translateMatrix;
@@ -148,63 +142,6 @@ public:
 	}
 	// 以上為Lab04以前的Rotate-----------------------------------------
 
-	void SetObjectXYZ(ObjLoader *ol) {
-
-		midX = ol->midX;
-		midY = ol->midY;
-		midZ = ol->midZ;
-
-		lengthX = ol->lengthX;
-		lengthY = ol->lengthY;
-		lengthZ = ol->lengthZ;
-
-		std::cout << std::endl;
-		std::cout << "config:" << std::endl;
-		std::cout << "midX:" << midX << std::endl;
-		std::cout << "midY:" << midY << std::endl;
-		std::cout << "midZ:" << midZ << std::endl;
-
-		std::cout << "lengthX:" << lengthX << std::endl;
-		std::cout << "lengthY:" << lengthY << std::endl;
-		std::cout << "lengthZ:" << lengthZ << std::endl;
-
-		auto max_array = { lengthX,lengthY,lengthZ };
-		float max = *std::max_element(max_array.begin(), max_array.end());
-
-		std::cout << "max:" << max << std::endl;
-
-		//glLoadIdentity();             // Reset
-		glOrtho(-max, max, -max, max, -max, max + 15);
-	}
-
-	void Draw() {
-		switch (render_Mode) {
-		case 1:
-			glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
-			break;
-		case 2:
-			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-			break;
-		case 3:
-			glPolygonMode(GL_FRONT, GL_FILL);
-			break;
-		}
-		obj[obj_draw].Draw();
-	}
-
-	void setObj_Draw(int which) {
-		obj_draw = which - 1;
-		SetObjectXYZ(&obj[obj_draw]);
-	}
-
-	void Set_Render_Mode(int mode) {
-		render_Mode = mode;
-	}
-
-	void Set_Bounding_Box(bool OnOrOff) {
-		obj[obj_draw].draw_BoundingBox = OnOrOff;
-	}
-
 	void Set_Ortho_Width_Height(GLfloat X, GLfloat Y, GLfloat Z) {
 		orthoX = X;
 		orthoY = Y;
@@ -219,13 +156,15 @@ public:
 	GLfloat orthoZ;
 	GLfloat gridWidth;
 	GLfloat gridHeight;
+
+	float clickX, clickY, clickZ;
 private:
 	GLfloat *translateMatrix;
 	GLfloat *rotMatrix_X;
 	GLfloat *rotMatrix_Y;
 	GLfloat *rotMatrix_Z;
 
-	int render_Mode;
-	int obj_draw;
-	std::vector <ObjLoader> obj;
+	//int render_Mode;
+	//int obj_draw;
+	//std::vector <ObjLoader> obj;
 };

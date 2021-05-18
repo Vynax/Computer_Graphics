@@ -14,7 +14,6 @@
 #include "global.h"
 #include "config.h"
 #include "menu.h"
-#include "objloader.h"
 
 void arbitrary_Rotate(float a, float b, float c);
 
@@ -42,7 +41,7 @@ void display() {
 	//glRotatef(15, 1, 0, 0);
 
 	draw_Axis();
-	draw_Click(clickX, clickY, clickZ, radius);
+	draw_Click(config.clickX, config.clickY, config.clickZ, radius);
 
 	glLoadIdentity();                  // Reset the model-view matrix
 	gluLookAt(0, 0, 15.0f, 0, 0, 0, 0, 1, 0);
@@ -89,15 +88,15 @@ void display() {
 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-	int x = (clickX / config.gridWidth);
-	int y = (clickY / config.gridHeight);
+	int x = (config.clickX / config.gridWidth);
+	int y = (config.clickY / config.gridHeight);
 
 	glPolygonMode(GL_FRONT, GL_FILL);
 	glBegin(GL_POLYGON);
 
-	if (clickX < 0)
+	if (config.clickX < 0)
 		x = x - 1;
-	if (clickY < 0)
+	if (config.clickY < 0)
 		y = y - 1;
 
 	glVertex3f(x*config.gridWidth, y*config.gridHeight, 0.0f);
@@ -172,11 +171,6 @@ void reshape(GLsizei width, GLsizei height) {  // GLsizei for non-negative integ
 
 /* Main function: GLUT runs as a console application starting at main() */
 int main(int argc, char** argv) {
-	//lamp = ObjLoader("lamp.obj");
-	//config.SetObjectXYZ(&lamp);
-	//teapot = ObjLoader("teapot.obj");
-	//config.SetObjectXYZ(&teapot);
-
 
 	// auto func = std::bind(&Config::mySpecialKey, &config);
 	glutInit(&argc, argv);            // Initialize GLUT

@@ -19,16 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Lab07_Midterm\config.h" />
-    <ClInclude Include="Lab07_Midterm\draw.h" />
-    <ClInclude Include="Lab07_Midterm\function.h" />
-    <ClInclude Include="Lab07_Midterm\global.h" />
-    <ClInclude Include="Lab07_Midterm\menu.h" />
-    <ClInclude Include="Lab07_Midterm\objloader.h" />
+    <ClInclude Include="Lab08_Grid_Coordinate\config.h" />
+    <ClInclude Include="Lab08_Grid_Coordinate\draw.h" />
+    <ClInclude Include="Lab08_Grid_Coordinate\function.h" />
+    <ClInclude Include="Lab08_Grid_Coordinate\global.h" />
+    <ClInclude Include="Lab08_Grid_Coordinate\menu.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lab07_Midterm\Lab07_Midterm_ObjParser.cpp" />
-    <ClCompile Include="Lab07_Midterm\objloader.cpp" />
+    <ClCompile Include="Lab08_Grid_Coordinate\Lab08_Grid_Coordinate.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

@@ -21,9 +21,9 @@ void myKeyboard(unsigned char key, int x, int y) {
 	switch (key) {
 	case 'r':
 		Click = false;
-		clickX = 0;
-		clickY = 0;
-		clickZ = 0;
+		config.clickX = 0;
+		config.clickY = 0;
+		config.clickZ = 0;
 
 		thetaX = angleX;
 		thetaY = angleY;
@@ -84,6 +84,7 @@ void mouseClicks(int button, int state, int x, int y) {     //當按下滑鼠左
 		//do something
 		// if (Click == false) {
 
+		float clickX, clickY;
 		int width = glutGet(GLUT_WINDOW_WIDTH);
 		int height = glutGet(GLUT_WINDOW_HEIGHT);
 
@@ -97,8 +98,8 @@ void mouseClicks(int button, int state, int x, int y) {     //當按下滑鼠左
 		else
 			clickY = (float)(height / 2 - y);
 
-		clickX = clickX * 600 / width;
-		clickY = clickY * 600 / height;
+		config.clickX = clickX * 600 / width;
+		config.clickY = clickY * 600 / height;
 
 		//clickX = clickX / width * range;
 		//clickY = clickY / height * range;

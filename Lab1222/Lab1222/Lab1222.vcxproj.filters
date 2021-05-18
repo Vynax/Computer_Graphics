@@ -15,30 +15,24 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Lab07_Midterm\config.h">
+    <ClInclude Include="Lab08_Grid_Coordinate\config.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
-    <ClInclude Include="Lab07_Midterm\draw.h">
+    <ClInclude Include="Lab08_Grid_Coordinate\draw.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
-    <ClInclude Include="Lab07_Midterm\function.h">
+    <ClInclude Include="Lab08_Grid_Coordinate\function.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
-    <ClInclude Include="Lab07_Midterm\global.h">
+    <ClInclude Include="Lab08_Grid_Coordinate\global.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
-    <ClInclude Include="Lab07_Midterm\menu.h">
-      <Filter>來源檔案</Filter>
-    </ClInclude>
-    <ClInclude Include="Lab07_Midterm\objloader.h">
+    <ClInclude Include="Lab08_Grid_Coordinate\menu.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lab07_Midterm\Lab07_Midterm_ObjParser.cpp">
-      <Filter>來源檔案</Filter>
-    </ClCompile>
-    <ClCompile Include="Lab07_Midterm\objloader.cpp">
+    <ClCompile Include="Lab08_Grid_Coordinate\Lab08_Grid_Coordinate.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>
