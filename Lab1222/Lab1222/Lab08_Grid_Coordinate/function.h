@@ -104,8 +104,8 @@ void mouseClicks(int button, int state, int x, int y) {     //當按下滑鼠左
 		//clickX = clickX / width * range;
 		//clickY = clickY / height * range;
 
-		std::cout << "Width:" << width << "Height:" << height << "x:" << x << "y:" << y;
-		std::cout << "ClickX:" << clickX << "ClickY:" << clickY << std::endl;
+		std::cout << "Width:" << width << " Height:" << height << " x:" << x << " y:" << y;
+		std::cout << " ClickX:" << config.clickX << " ClickY:" << config.clickY << std::endl;
 
 
 		//Click = true;

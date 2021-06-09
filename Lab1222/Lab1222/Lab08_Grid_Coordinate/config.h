@@ -183,25 +183,24 @@ public:
 
 	void Draw_Target_Cube() {
 		glColor3f(1.0f, 1.0f, 1.0f); // White (RGB)
-		int x = (clickX / gridWidth);
-		int y = (clickY / gridHeight);
+		int x = ((clickX - gridWidth / 2) / gridWidth);
+		int y = ((clickY - gridHeight / 2) / gridHeight);
 
 		glPolygonMode(GL_FRONT, GL_FILL);
 		glBegin(GL_POLYGON);
 
-		/*if (clickX < 0)
-			x = x - 1;
-		if (clickY < 0)
-			y = y - 1;*/
+		if (clickX > gridWidth / 2)
+			x = x + 1;
+		if (clickY > gridHeight / 2)
+			y = y + 1;
 
-		glVertex3f(x*gridWidth, y*gridHeight, 0.0f);
-		glVertex3f(x*gridWidth + gridWidth, y*gridHeight, 0.0f);
-		glVertex3f(x*gridWidth + gridWidth, y*gridHeight + gridHeight, 0.0f);
-		glVertex3f(x*gridWidth, y*gridHeight + gridHeight, 0.0f);
+		glVertex3f(x*gridWidth - gridWidth / 2, y*gridHeight - gridHeight / 2, 0.0f);
+		glVertex3f(x*gridWidth + gridWidth - gridWidth / 2, y*gridHeight - gridHeight / 2, 0.0f);
+		glVertex3f(x*gridWidth + gridWidth - gridWidth / 2, y*gridHeight + gridHeight - gridHeight / 2, 0.0f);
+		glVertex3f(x*gridWidth - gridWidth / 2, y*gridHeight + gridHeight - gridHeight / 2, 0.0f);
 
 		glEnd();
-
-		std::cout << "grid x:" << x << " grid y" << y << std::endl;
+		std::cout << "grid x:" << x << " grid y:" << y << std::endl;
 	}
 
 	float midX, midY, midZ;
