@@ -4,7 +4,7 @@
 #define angleZ 0
 
 #include "config.h"
-#include "objloader.h"
+//#include "objloader.h"
 
 /* Global variables */
 static char title[] = "Lab08_Grid_Coordinate";

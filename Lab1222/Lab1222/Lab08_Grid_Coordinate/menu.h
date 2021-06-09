@@ -49,12 +49,18 @@ void grid_Size_Menu(int option) {
 	switch (option) {
 	case 1:
 		std::cout << "9 x 9" << std::endl;
+		config.Set_Grid_Amount(9);
+		glutPostRedisplay();
 		break;
 	case 2:
 		std::cout << "25 x 25" << std::endl;
+		config.Set_Grid_Amount(25);
+		glutPostRedisplay();
 		break;
 	case 3:
 		std::cout << "85 x 85" << std::endl;
+		config.Set_Grid_Amount(85);
+		glutPostRedisplay();
 		break;
 	default:
 		break;

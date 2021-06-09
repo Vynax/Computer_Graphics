@@ -66,76 +66,13 @@ void display() {
 
 	//glLoadIdentity();
 
-	float lineHDistance = 20.0;
-	float lineVDistance = 20.0;
-
-	glColor3f(1.0f, 1.0f, 1.0f); // White (RGB)
-
-	for (float x = -config.orthoX; x <= config.orthoX; x += config.gridWidth)
-	{
-		glBegin(GL_LINES);
-		glVertex3f(x, -config.orthoY, 0.0f);
-		glVertex3f(x, config.orthoY, 0.0f);
-		glEnd();
-	}
-	for (float y = -config.orthoY; y <= config.orthoY; y += config.gridHeight)
-	{
-		glBegin(GL_LINES);
-		glVertex3f(-config.orthoX, y, 0.0f);
-		glVertex3f(config.orthoX, y, 0.0f);
-		glEnd();
-	}
-
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	config.Draw();
 
-	int x = (config.clickX / config.gridWidth);
-	int y = (config.clickY / config.gridHeight);
-
-	glPolygonMode(GL_FRONT, GL_FILL);
-	glBegin(GL_POLYGON);
-
-	if (config.clickX < 0)
-		x = x - 1;
-	if (config.clickY < 0)
-		y = y - 1;
-
-	glVertex3f(x*config.gridWidth, y*config.gridHeight, 0.0f);
-	glVertex3f(x*config.gridWidth + config.gridWidth, y*config.gridHeight, 0.0f);
-	glVertex3f(x*config.gridWidth + config.gridWidth, y*config.gridHeight + config.gridHeight, 0.0f);
-	glVertex3f(x*config.gridWidth, y*config.gridHeight + config.gridHeight, 0.0f);
-
-	glEnd();
 	//lamp.Draw();
 	//config.Draw();
 
 	glutSwapBuffers();  // Swap the front and back frame buffers (double buffering)
-}
-
-//假設忽略Z軸，任意軸旋轉XY平面上的軸
-void arbitrary_Rotate(float a, float b, float c) {
-	float sinx = b / sqrt(pow(b, 2) + pow(c, 2));
-	float cosx = c / sqrt(pow(b, 2) + pow(c, 2));
-
-	float siny = a / sqrt(pow(a, 2) + pow(c, 2));
-	float cosy = (c / sqrt(pow(a, 2) + pow(c, 2)));
-
-	//Rx(theta)
-	GLfloat *matrixX = config.getRotateX(sinx, cosx);
-	glMultMatrixf(matrixX);
-	//Ry(theta)
-	GLfloat *matrixY = config.getRotateY(siny, cosy);
-	glMultMatrixf(matrixY);
-	//Rz
-	thetaZ += 3;
-	glMultMatrixf(config.getRotateZ(thetaZ));
-
-	//Ry^-1(theta)
-	glMultMatrixf(config.getTransPose(matrixY));
-
-	//Rx^-1(theta)
-	glMultMatrixf(config.getTransPose(matrixX));
-
-	std::cout << "arbitrary_Rotate" << std::endl;
 }
 
 /* Handler for window re-size event. Called back when the window first appears and
@@ -163,6 +100,7 @@ void reshape(GLsizei width, GLsizei height) {  // GLsizei for non-negative integ
 	std::cout << "max:" << max << std::endl;
 
 	config.Set_Ortho_Width_Height(300, 300, 300);
+	//config.Set_Grid_Width_Height();
 
 	glOrtho(-config.orthoX, config.orthoX, -config.orthoY, config.orthoY, -config.orthoZ, config.orthoZ);
 	glMatrixMode(GL_MODELVIEW);
@@ -184,11 +122,18 @@ int main(int argc, char** argv) {
 	glutSpecialFunc(mySpecialKey);
 	glutMouseFunc(mouseClicks);
 
+	config.Set_Grid_Amount(25);
+
 	// 建立右建選單
 	buildPopupMenu();
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 
+
 	initGL();                       // Our own OpenGL initialization
+
+
 	glutMainLoop();                 // Enter the infinite event-processing loop
+
+
 	return 0;
 }
