@@ -19,14 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Lab08_Grid_Coordinate\config.h" />
-    <ClInclude Include="Lab08_Grid_Coordinate\draw.h" />
-    <ClInclude Include="Lab08_Grid_Coordinate\function.h" />
-    <ClInclude Include="Lab08_Grid_Coordinate\global.h" />
-    <ClInclude Include="Lab08_Grid_Coordinate\menu.h" />
+    <ClInclude Include="Lab08_Rasterization\config.h" />
+    <ClInclude Include="Lab08_Rasterization\draw.h" />
+    <ClInclude Include="Lab08_Rasterization\function.h" />
+    <ClInclude Include="Lab08_Rasterization\global.h" />
+    <ClInclude Include="Lab08_Rasterization\menu.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lab08_Grid_Coordinate\Lab08_Grid_Coordinate.cpp" />
+    <ClCompile Include="Lab08_Rasterization\Lab07_Grid_Coordinate.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

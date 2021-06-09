@@ -15,24 +15,24 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Lab08_Grid_Coordinate\config.h">
+    <ClInclude Include="Lab08_Rasterization\config.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
-    <ClInclude Include="Lab08_Grid_Coordinate\draw.h">
+    <ClInclude Include="Lab08_Rasterization\draw.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
-    <ClInclude Include="Lab08_Grid_Coordinate\function.h">
+    <ClInclude Include="Lab08_Rasterization\function.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
-    <ClInclude Include="Lab08_Grid_Coordinate\global.h">
+    <ClInclude Include="Lab08_Rasterization\global.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
-    <ClInclude Include="Lab08_Grid_Coordinate\menu.h">
+    <ClInclude Include="Lab08_Rasterization\menu.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lab08_Grid_Coordinate\Lab08_Grid_Coordinate.cpp">
+    <ClCompile Include="Lab08_Rasterization\Lab07_Grid_Coordinate.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>
