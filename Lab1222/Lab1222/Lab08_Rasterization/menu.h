@@ -12,7 +12,7 @@ void grid_Size_Menu(int);
 
 int buildPopupMenu(void)
 {
-	int menu, obj_Menu, render_mode_Menu, color_mode_Menu, bounding_box_Menu, ax_Menu;
+	int menu;//, obj_Menu, render_mode_Menu, color_mode_Menu, bounding_box_Menu, ax_Menu;
 	int grid_Menu;
 
 	grid_Menu = glutCreateMenu(grid_Size_Menu);

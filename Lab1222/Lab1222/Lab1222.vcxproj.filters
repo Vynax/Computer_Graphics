@@ -32,7 +32,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lab08_Rasterization\Lab07_Grid_Coordinate.cpp">
+    <ClCompile Include="Lab08_Rasterization\Lab08_Rasterization.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>

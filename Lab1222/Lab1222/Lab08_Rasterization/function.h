@@ -98,8 +98,10 @@ void mouseClicks(int button, int state, int x, int y) {     //當按下滑鼠左
 		else
 			clickY = (float)(height / 2 - y);
 
-		config.clickX = clickX * 600 / width;
-		config.clickY = clickY * 600 / height;
+		config.Add_New_Click((int)(clickX * config.orthoX * 2 / width), (int)(clickY * config.orthoY * 2 / height));
+
+		//config.clickX = clickX * config.orthoX * 2 / width;
+		//config.clickY = clickY * config.orthoY * 2 / height;
 
 		//clickX = clickX / width * range;
 		//clickY = clickY / height * range;
