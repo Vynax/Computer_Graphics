@@ -1,4 +1,4 @@
-// GLTools.h
+﻿// GLTools.h
 // OpenGL SuperBible
 // Copyright 1998 - 2003 Richard S. Wright Jr.
 // Code by Richard S. Wright Jr.
@@ -17,9 +17,9 @@
 #ifdef WIN32
 #include <windows.h>		// Must have for Windows platform builds
 #include "glee.h"			// OpenGL Extension "autoloader"
-#include <gl\gl.h>			// Microsoft OpenGL headers (version 1.1 by themselves)
-#include <gl\glu.h>			// OpenGL Utilities
-#include "glut.h"			// Glut (Free-Glut on Windows)
+//#include <gl\gl.h>			// Microsoft OpenGL headers (version 1.1 by themselves)
+//#include <gl\glu.h>			// OpenGL Utilities
+#include "../../freeglut/include/GL/glut.h"
 #endif
 
 // Mac OS X
@@ -48,13 +48,13 @@
 
 
 #ifdef linux
-typedef GLvoid (*CallBack)();
+typedef GLvoid(*CallBack)();
 #else
 
 #ifndef WIN32
-typedef GLvoid (*CallBack)(...);            //  XCode (GNU) style
+typedef GLvoid(*CallBack)(...);            //  XCode (GNU) style
 #else
-typedef GLvoid (_stdcall *CallBack)();      // Visual C++ style
+typedef GLvoid(_stdcall *CallBack)();      // Visual C++ style
 #endif
 
 #endif
@@ -75,7 +75,7 @@ typedef GLvoid (_stdcall *CallBack)();      // Visual C++ style
 // There is a static block allocated for loading shaders to prevent heap fragmentation
 #define MAX_SHADER_LENGTH   8192
 
-    
+
 ///////////////////////////////////////////////////////
 // Macros for big/little endian happiness
 // These are intentionally written to be easy to understand what they 
@@ -86,34 +86,34 @@ typedef GLvoid (_stdcall *CallBack)();      // Visual C++ style
 // If the value must be changed it is... otherwise, this
 // function is defined away below (on Intel systems for example)
 inline void LITTLE_ENDIAN_WORD(void *pWord)
-	{
-    unsigned char *pBytes = (unsigned char *)pWord;
-    unsigned char temp;
-    
-    temp = pBytes[0];
-    pBytes[0] = pBytes[1];
-    pBytes[1] = temp;
-	}
+{
+	unsigned char *pBytes = (unsigned char *)pWord;
+	unsigned char temp;
+
+	temp = pBytes[0];
+	pBytes[0] = pBytes[1];
+	pBytes[1] = temp;
+}
 
 ///////////////////////////////////////////////////////////
 // This function says, "this pointer is a little endian value"
 // If the value must be changed it is... otherwise, this
 // function is defined away below (on Intel systems for example)
 inline void LITTLE_ENDIAN_DWORD(void *pWord)
-	{
-    unsigned char *pBytes = (unsigned char *)pWord;
-    unsigned char temp;
-    
-    // Swap outer bytes
-    temp = pBytes[3];
-    pBytes[3] = pBytes[0];
-    pBytes[0] = temp;
-    
-    // Swap inner bytes
-    temp = pBytes[1];
-    pBytes[1] = pBytes[2];
-    pBytes[2] = temp;
-	}
+{
+	unsigned char *pBytes = (unsigned char *)pWord;
+	unsigned char temp;
+
+	// Swap outer bytes
+	temp = pBytes[3];
+	pBytes[3] = pBytes[0];
+	pBytes[0] = temp;
+
+	// Swap inner bytes
+	temp = pBytes[1];
+	pBytes[1] = pBytes[2];
+	pBytes[2] = temp;
+}
 #else
 
 // Define them away on little endian systems

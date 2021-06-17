@@ -19,14 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Lab08_Rasterization\config.h" />
-    <ClInclude Include="Lab08_Rasterization\draw.h" />
-    <ClInclude Include="Lab08_Rasterization\function.h" />
-    <ClInclude Include="Lab08_Rasterization\global.h" />
-    <ClInclude Include="Lab08_Rasterization\menu.h" />
+    <ClCompile Include="Lab14_Test_Pyramid\Lab14_Test_Pyramid.cpp" />
+    <ClCompile Include="Lab14_Test_Pyramid\shared\math3d.cpp" />
+    <ClCompile Include="Lab14_Test_Pyramid\TGATexture.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lab08_Rasterization\Lab08_Rasterization.cpp" />
+    <ClInclude Include="Lab14_Test_Pyramid\TGATexture.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -98,12 +96,11 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
