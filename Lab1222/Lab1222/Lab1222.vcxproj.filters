@@ -15,19 +15,25 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lab14_Test_Pyramid\Lab14_Test_Pyramid.cpp">
-      <Filter>來源檔案</Filter>
-    </ClCompile>
-    <ClCompile Include="Lab14_Test_Pyramid\TGATexture.cpp">
-      <Filter>來源檔案</Filter>
-    </ClCompile>
-    <ClCompile Include="Lab14_Test_Pyramid\shared\math3d.cpp">
-      <Filter>來源檔案</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Lab14_Test_Pyramid\TGATexture.h">
+    <ClInclude Include="Lab08_Rasterization\config.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
+    <ClInclude Include="Lab08_Rasterization\draw.h">
+      <Filter>來源檔案</Filter>
+    </ClInclude>
+    <ClInclude Include="Lab08_Rasterization\function.h">
+      <Filter>來源檔案</Filter>
+    </ClInclude>
+    <ClInclude Include="Lab08_Rasterization\global.h">
+      <Filter>來源檔案</Filter>
+    </ClInclude>
+    <ClInclude Include="Lab08_Rasterization\menu.h">
+      <Filter>來源檔案</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Lab08_Rasterization\Lab08_Rasterization.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

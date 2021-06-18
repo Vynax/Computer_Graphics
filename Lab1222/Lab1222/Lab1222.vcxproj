@@ -19,12 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lab14_Test_Pyramid\Lab14_Test_Pyramid.cpp" />
-    <ClCompile Include="Lab14_Test_Pyramid\shared\math3d.cpp" />
-    <ClCompile Include="Lab14_Test_Pyramid\TGATexture.cpp" />
+    <ClInclude Include="Lab08_Rasterization\config.h" />
+    <ClInclude Include="Lab08_Rasterization\draw.h" />
+    <ClInclude Include="Lab08_Rasterization\function.h" />
+    <ClInclude Include="Lab08_Rasterization\global.h" />
+    <ClInclude Include="Lab08_Rasterization\menu.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Lab14_Test_Pyramid\TGATexture.h" />
+    <ClCompile Include="Lab08_Rasterization\Lab08_Rasterization.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
