@@ -103,25 +103,35 @@ public:
     }
 
     void Draw_Line_Target_Cube() {
-        int x1, y1, x2, y2;
-        x1 = coor_vec[0].X;
-        y1 = coor_vec[0].Y;
+        int x1, y1, x2, y2, size;
 
-        x2 = coor_vec[1].X;
-        y2 = coor_vec[1].Y;
+        size = click_vec.size();
 
         glColor3f(1.0f, 0.5f, 0.0f);//Orange
         //glColor3f(0.2f, 0.3f, 0.5f);  //Some type of blue
-        glBegin(GL_LINES);
-        glVertex3f(x1 * gridWidth, y1 * gridHeight, 0);
-        glVertex3f(x2 * gridWidth, y2 * gridHeight, 0);
-        glEnd();
+
+        //改成畫三條線
+        for (unsigned int i = 0; i < size; i++) {
+
+
+            x1 = coor_vec[i].X;
+            y1 = coor_vec[i].Y;
+
+            x2 = coor_vec[(i + 1) % size].X;
+            y2 = coor_vec[(i + 1) % size].Y;
+            glBegin(GL_LINES);
+            glVertex3f(x1 * gridWidth, y1 * gridHeight, 0);
+            glVertex3f(x2 * gridWidth, y2 * gridHeight, 0);
+            glEnd();
+        }
     }
 
     void Add_New_Click(int x, int y) {
-
-        if (which_to_pop != -1 && click_vec.size() == 2)
-            click_vec.erase(click_vec.begin());
+        //重置三角形
+        if (which_to_pop != -1 && click_vec.size() == 3) {
+            click_vec.clear();
+            coor_vec.clear();
+        }
         Coordinate temp(x, y);
         click_vec.push_back(temp);
         if (which_to_pop == -1)
@@ -129,6 +139,7 @@ public:
 
         coor_vec.clear();
         // 借用 x 跟 y
+        // 轉換座標
         for (unsigned int i = 0; i < click_vec.size(); i++) {
 
             x = (int)((click_vec[i].X - gridWidth / 2) / gridWidth);
@@ -142,8 +153,8 @@ public:
             Coordinate temp2(x, y);
             coor_vec.push_back(temp2);
         }
-        if (coor_vec.size() == 2)
-            setLine(coor_vec[0].X, coor_vec[0].Y, coor_vec[1].X, coor_vec[1].Y, false);
+        //if (coor_vec.size() == 2)
+            //setLine(coor_vec[0].X, coor_vec[0].Y, coor_vec[1].X, coor_vec[1].Y, false);
     }
 
     void setLine(int x0, int y0, int x1, int y1, bool ever_switch) {
