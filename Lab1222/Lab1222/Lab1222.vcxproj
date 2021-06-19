@@ -19,14 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Lab08_Rasterization\config.h" />
-    <ClInclude Include="Lab08_Rasterization\draw.h" />
-    <ClInclude Include="Lab08_Rasterization\function.h" />
-    <ClInclude Include="Lab08_Rasterization\global.h" />
-    <ClInclude Include="Lab08_Rasterization\menu.h" />
+    <ClInclude Include="Lab09_Rasterization_Half_Space\config.h" />
+    <ClInclude Include="Lab09_Rasterization_Half_Space\draw.h" />
+    <ClInclude Include="Lab09_Rasterization_Half_Space\function.h" />
+    <ClInclude Include="Lab09_Rasterization_Half_Space\global.h" />
+    <ClInclude Include="Lab09_Rasterization_Half_Space\menu.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lab08_Rasterization\Lab08_Rasterization.cpp" />
+    <ClCompile Include="Lab09_Rasterization_Half_Space\Lab09_Rasterization_Half_Space.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

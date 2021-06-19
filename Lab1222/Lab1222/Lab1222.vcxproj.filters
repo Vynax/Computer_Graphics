@@ -15,24 +15,24 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Lab08_Rasterization\config.h">
+    <ClInclude Include="Lab09_Rasterization_Half_Space\config.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
-    <ClInclude Include="Lab08_Rasterization\draw.h">
+    <ClInclude Include="Lab09_Rasterization_Half_Space\draw.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
-    <ClInclude Include="Lab08_Rasterization\function.h">
+    <ClInclude Include="Lab09_Rasterization_Half_Space\function.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
-    <ClInclude Include="Lab08_Rasterization\global.h">
+    <ClInclude Include="Lab09_Rasterization_Half_Space\global.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
-    <ClInclude Include="Lab08_Rasterization\menu.h">
+    <ClInclude Include="Lab09_Rasterization_Half_Space\menu.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lab08_Rasterization\Lab08_Rasterization.cpp">
+    <ClCompile Include="Lab09_Rasterization_Half_Space\Lab09_Rasterization_Half_Space.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>
