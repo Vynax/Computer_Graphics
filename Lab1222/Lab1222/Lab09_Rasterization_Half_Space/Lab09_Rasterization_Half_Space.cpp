@@ -1,4 +1,4 @@
-﻿/*
+/*
  * OGL01Shape3D.cpp: 3D Shapes
  */
 

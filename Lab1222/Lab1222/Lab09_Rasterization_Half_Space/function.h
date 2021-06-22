@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #define angleX 0
 #define angleY -30
@@ -7,6 +7,7 @@
 #include <cmath>
 #include <GL/glut.h>  // GLUT, include glu.h and gl.h
 #include "global.h"
+#include "coordinate.h"
 
 float getSin(float theta) {
     return (float)sin(theta * M_PI / 180.0);
@@ -20,6 +21,10 @@ void int_swap(int *a, int*b) {
     *a = *a ^ *b;
     *b = *a ^ *b;
     *a = *a ^ *b;
+}
+
+bool compare_angle(Coordinate a, Coordinate b) {
+    return a.angle < b.angle; // 升冪排列
 }
 
 void myKeyboard(unsigned char key, int x, int y) {

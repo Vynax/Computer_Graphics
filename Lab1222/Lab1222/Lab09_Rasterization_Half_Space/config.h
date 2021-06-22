@@ -1,23 +1,21 @@
 #pragma once
 
 #include <GL/glut.h>  // GLUT, include glu.h and gl.h
-#include <algorithm>    // std::swap
+#include <algorithm>    // std::swap std::sort
 #include <cmath>        // abs
 #include "function.h"
 #include <vector>
 #include <cstdlib> // for abs
+#include "coordinate.h"
+#include <iostream>
+#include "line.h"
 //#include "objloader.h"
 
 float getSin(float);
 float getCos(float);
 void int_swap(int *a, int*b);
+bool compare_angle(Coordinate a, Coordinate b);
 
-class Coordinate {
-public:
-    Coordinate(int x, int y) :X(x), Y(y) {}
-    int X;
-    int Y;
-};
 
 class Config {
 public:
@@ -71,21 +69,20 @@ public:
     void Draw_Target_Cube() {
 
         int x, y;
-
         glColor3f(1.0f, 1.0f, 1.0f); // White (RGB)
         for (unsigned int i = 0; i < coor_vec.size(); i++) {
 
-            x = coor_vec[i].X;
-            y = coor_vec[i].Y;
-            //x = (int)((click_vec[i].X - gridWidth / 2) / gridWidth);
-            //y = (int)((click_vec[i].Y - gridHeight / 2) / gridHeight);
+            x = coor_vec[i].x;
+            y = coor_vec[i].y;
+            //x = (int)((click_vec[i].x - gridWidth / 2) / gridWidth);
+            //y = (int)((click_vec[i].y - gridHeight / 2) / gridHeight);
 
             glPolygonMode(GL_FRONT, GL_FILL);
             glBegin(GL_POLYGON);
 
-            //if (click_vec[i].X > gridWidth / 2)
+            //if (click_vec[i].x > gridWidth / 2)
             //  x = x + 1;
-            //if (click_vec[i].Y > gridHeight / 2)
+            //if (click_vec[i].y > gridHeight / 2)
             //  y = y + 1;
 
             glVertex3f(x*gridWidth - gridWidth / 2, y*gridHeight - gridHeight / 2, 0.0f);
@@ -94,31 +91,56 @@ public:
             glVertex3f(x*gridWidth - gridWidth / 2, y*gridHeight + gridHeight - gridHeight / 2, 0.0f);
 
             glEnd();
-            std::cout << "grid x:" << x << " grid y:" << y << std::endl;
+            //std::cout << "grid x:" << x << " grid y:" << y << std::endl;
         }
 
         if (click_vec.size() >= 2) {
             Draw_Line_Target_Cube();
         }
+
+
+        glColor3f(1.0f, 0.0f, 0.0f); // Red (RGB)
+        for (unsigned int i = 0; i < click_coor_vec.size(); i++) {
+            x = click_coor_vec[i].x;
+            y = click_coor_vec[i].y;
+            //x = (int)((click_vec[i].x - gridWidth / 2) / gridWidth);
+            //y = (int)((click_vec[i].y - gridHeight / 2) / gridHeight);
+
+            glPolygonMode(GL_FRONT, GL_FILL);
+            glBegin(GL_POLYGON);
+
+            //if (click_vec[i].x > gridWidth / 2)
+            //  x = x + 1;
+            //if (click_vec[i].y > gridHeight / 2)
+            //  y = y + 1;
+
+            glVertex3f(x*gridWidth - gridWidth / 2, y*gridHeight - gridHeight / 2, 0.0f);
+            glVertex3f(x*gridWidth + gridWidth - gridWidth / 2, y*gridHeight - gridHeight / 2, 0.0f);
+            glVertex3f(x*gridWidth + gridWidth - gridWidth / 2, y*gridHeight + gridHeight - gridHeight / 2, 0.0f);
+            glVertex3f(x*gridWidth - gridWidth / 2, y*gridHeight + gridHeight - gridHeight / 2, 0.0f);
+
+            glEnd();
+        }
+
     }
 
     void Draw_Line_Target_Cube() {
-        int x1, y1, x2, y2, size;
-
+        int x1, y1, x2, y2;
+        int size;
         size = click_vec.size();
 
         glColor3f(1.0f, 0.5f, 0.0f);//Orange
         //glColor3f(0.2f, 0.3f, 0.5f);  //Some type of blue
 
         //改成畫三條線
-        for (unsigned int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
 
 
-            x1 = coor_vec[i].X;
-            y1 = coor_vec[i].Y;
+            x1 = coor_vec[i].x;
+            y1 = coor_vec[i].y;
 
-            x2 = coor_vec[(i + 1) % size].X;
-            y2 = coor_vec[(i + 1) % size].Y;
+            x2 = coor_vec[(i + 1) % size].x;
+            y2 = coor_vec[(i + 1) % size].y;
             glBegin(GL_LINES);
             glVertex3f(x1 * gridWidth, y1 * gridHeight, 0);
             glVertex3f(x2 * gridWidth, y2 * gridHeight, 0);
@@ -142,131 +164,115 @@ public:
         // 轉換座標
         for (unsigned int i = 0; i < click_vec.size(); i++) {
 
-            x = (int)((click_vec[i].X - gridWidth / 2) / gridWidth);
-            y = (int)((click_vec[i].Y - gridHeight / 2) / gridHeight);
+            x = (int)((click_vec[i].x - gridWidth / 2) / gridWidth);
+            y = (int)((click_vec[i].y - gridHeight / 2) / gridHeight);
 
-            if (click_vec[i].X > gridWidth / 2)
+            if (click_vec[i].x > gridWidth / 2)
                 x = x + 1;
-            if (click_vec[i].Y > gridHeight / 2)
+            if (click_vec[i].y > gridHeight / 2)
                 y = y + 1;
 
             Coordinate temp2(x, y);
             coor_vec.push_back(temp2);
         }
-        //if (coor_vec.size() == 2)
-            //setLine(coor_vec[0].X, coor_vec[0].Y, coor_vec[1].X, coor_vec[1].Y, false);
+
+        click_coor_vec = coor_vec;
+
+        if (coor_vec.size() == 3)
+            fillTriangle();
+        //setLine(coor_vec[0].x, coor_vec[0].y, coor_vec[1].x, coor_vec[1].y, false);
+    }
+    // (x2 - x1) (y - y1) = (y2 - y1) (x - x1)
+    void fillTriangle() {
+        //int e1 = lineEq();
+        int centerx = 0, centery = 0, xMin, xMax, yMin, yMax;
+
+        xMin = coor_vec[0].x; //給他們第一個點的數值
+        xMax = coor_vec[0].x;
+        yMin = coor_vec[0].y;
+        yMax = coor_vec[0].y;
+        for (unsigned int i = 0; i < coor_vec.size(); i++) {
+            if (xMin > coor_vec[i].x)   //找最大最小值
+                xMin = coor_vec[i].x;
+            if (xMax < coor_vec[i].x)
+                xMax = coor_vec[i].x;
+            if (yMin > coor_vec[i].y)
+                yMin = coor_vec[i].y;
+            if (yMax < coor_vec[i].y)
+                yMax = coor_vec[i].y;
+
+            centerx = centerx + coor_vec[i].x;  //計算三角形的中心點
+            centery = centery + coor_vec[i].y;
+        }
+        centerx = centerx / 3;
+        centery = centery / 3;
+        Coordinate center(centerx, centery);
+        //std::cout << 
+        for (unsigned int i = 0; i < coor_vec.size(); i++) {
+            coor_vec[i].angle = GetAngle(center, coor_vec[i]);
+            std::cout << "角度:" << coor_vec[i].angle << std::endl;
+        }
+        std::sort(coor_vec.begin(), coor_vec.begin() + 3, compare_angle); //逆時針排序，用角度排
+        for (unsigned int i = 0; i < coor_vec.size(); i++) {
+            std::cout << "排序後角度:" << coor_vec[i].angle << std::endl;
+        }
+
+        Line L1, L2, L3;
+
+        int e1 = lineEq(&L1, coor_vec[0], coor_vec[1], xMin, yMin);
+        int e2 = lineEq(&L2, coor_vec[1], coor_vec[2], xMin, yMin);
+        int e3 = lineEq(&L3, coor_vec[2], coor_vec[0], xMin, yMin);
+        int xDim = xMax - xMin + 1;
+        std::cout << "xDim: " << xDim << std::endl;
+        std::cout << "L1 = " << L1.a << "x + " << L1.b << "y + " << L1.c << " e1: " << e1 << std::endl;
+        std::cout << "L2 = " << L2.a << "x + " << L2.b << "y + " << L2.c << " e2: " << e2 << std::endl;
+        std::cout << "L3 = " << L3.a << "x + " << L3.b << "y + " << L3.c << " e3: " << e3 << std::endl;
+        std::cout << "xMin : " << xMin << " xMax : " << xMax << " yMin : " << yMin << " yMax : " << yMax << std::endl;
+        for (int y = yMin; y <= yMax; y++) {
+            for (int x = xMin; x <= xMax; x++) {
+                if (e1 < 0 && e2 < 0 && e3 < 0) {
+                    Add_Coor_to_Vec(&coor_vec, x, y);
+                    //std::cout << "Add ( " << x << ", " << y << " ) into vector" << " e1: " << e1 << " e2: " << e2 << " e3: " << e3 << std::endl;
+
+                }
+                e1 += L1.a;
+                e2 += L2.a;
+                e3 += L3.a;
+            }
+            e1 = e1 - xDim * L1.a + L1.b;
+            e2 = e2 - xDim * L2.a + L2.b;
+            e3 = e3 - xDim * L3.a + L3.b;
+        }
     }
 
-    void setLine(int x0, int y0, int x1, int y1, bool ever_switch) {
-        if (x0 > x1)
-        {
-            setLine(x1, y1, x0, y0, ever_switch);
-            return;
-        }
+    float GetAngle(Coordinate a, Coordinate b)
+    {
+        // 這邊需要過濾掉位置相同的問題
+        if (a.x == b.x && a.y >= b.y) return 0;
 
-        // 看維基百科改來的--------------
-        bool steep;
-        if (x1 != x0) {
+        b.x -= a.x;
+        b.y -= a.y;
+        Coordinate c(0, -1);
 
-            steep = abs(y1 - y0) > abs(x1 - x0);
-            if (steep) {
-                std::cout << "Before x0: " << x0 << " y0: " << y0;
-                std::cout << " x1: " << x1 << " y1: " << y1 << std::endl;
-                int_swap(&x0, &y0);
-                int_swap(&x1, &y1);
-                std::cout << "After x0: " << x0 << " y0: " << y0;
-                std::cout << " x1: " << x1 << " y1: " << y1 << std::endl;
-                if (x0 > x1)
-                {
-                    setLine(x1, y1, x0, y0, true);
-                    return;
-                }
-            }
-        }
-        int ystep;
+        int d1 = (c.x * b.x) + (c.y * b.y);
+        float d2 = c.magnitude() * b.magnitude();
+        float angle = acos(d1 / d2) * (180 / M_PI);
 
-        // ----------------------------
+        if (b.x < 0) angle *= -1;
 
+        if (angle < 0)
+            angle = angle + 360;
+        return angle;
+    }
 
-        int dx = x1 - x0;
-        int dy = y1 - y0;
-        float m = (float)dy / (float)dx;
-        int d = 2 * dy - dx;
-        int delE = 2 * dy;
-        int delNE = 2 * (dy - dx);
-        // 看維基百科改來的--------------
-        if (y0 < y1)
-            ystep = 1;
-
-        else {
-            ystep = -1;
-            d = 2 * -dy - dx;
-            delE = 2 * -dy;
-            delNE = 2 * (-dy - dx);
-        }
-        // ----------------------------
-        int x = x0;
-        int y = y0;
-        std::cout << "m: " << m << std::endl;
-        // 水平線
-        if (m == 0) {
-            while (x < x1) {
-                x = x + 1;
-                Add_Coor_to_Vec(&coor_vec, x, y);
-            }
-        }
-        //垂直線
-        else if (x0 == x1 && y0 != y1) {
-            if (y0 < y1)
-                while (y < y1) {
-                    y = y + 1;
-                    Add_Coor_to_Vec(&coor_vec, x, y);
-                }
-            else if (y0 > y1)
-                while (y > y1) {
-                    y = y - 1;
-                    Add_Coor_to_Vec(&coor_vec, x, y);
-                }
-        }
-        // 45度的斜直線
-        else if (m == 1) {
-            while (x < x1) {
-                x = x + 1;
-                y = y + 1;
-                Add_Coor_to_Vec(&coor_vec, x, y);
-            }
-        }
-        // -45度的斜直線
-        else if (m == -1) {
-            while (x < x1) {
-                x = x + 1;
-                y = y - 1;
-                Add_Coor_to_Vec(&coor_vec, x, y);
-            }
-        }
-        else {
-            while (x < x1) {
-                if (d <= 0) {
-                    d += delE;
-                    x = x + 1;
-                }
-                else {
-                    d += delNE;
-                    x = x + 1;
-                    y = y + ystep;
-                }
-                if (y0 != y1 && steep) {
-                    Add_Coor_to_Vec(&coor_vec, y, x);
-                    std::cout << "add new coor: x:" << y << " y: " << x << std::endl;
-                }
-                else {
-                    if (ever_switch)
-                        Add_Coor_to_Vec(&coor_vec, y, x);
-                    else
-                        Add_Coor_to_Vec(&coor_vec, x, y);
-                }
-            }
-        }
+    int lineEq(Line *l, Coordinate dot_1, Coordinate dot_2, int x, int y) {
+        int a = dot_2.y - dot_1.y;
+        int b = -(dot_2.x - dot_1.x);
+        int c = -dot_1.x *(dot_2.y - dot_1.y) + dot_1.y*(dot_2.x - dot_1.x);
+        l->a = a;
+        l->b = b;
+        l->c = c;
+        return a * x + b * y + c;
     }
 
     void Add_Coor_to_Vec(std::vector<Coordinate> *vec, int x, int y) {
@@ -274,7 +280,7 @@ public:
         vec->push_back(temp);
     }
 
-    float midX, midY, midZ;
+    //float midX, midY, midZ;
 
     float lengthX, lengthY, lengthZ;
     GLfloat orthoX;
@@ -296,5 +302,6 @@ private:
 
     std::vector<Coordinate> click_vec;
     std::vector<Coordinate> coor_vec; // 轉換後的座標
+    std::vector<Coordinate> click_coor_vec; //儲存轉換後的點擊座標
     int which_to_pop = -1;
 };

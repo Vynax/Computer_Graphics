@@ -18,6 +18,9 @@
     <ClInclude Include="Lab09_Rasterization_Half_Space\config.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
+    <ClInclude Include="Lab09_Rasterization_Half_Space\coordinate.h">
+      <Filter>來源檔案</Filter>
+    </ClInclude>
     <ClInclude Include="Lab09_Rasterization_Half_Space\draw.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
@@ -25,6 +28,9 @@
       <Filter>來源檔案</Filter>
     </ClInclude>
     <ClInclude Include="Lab09_Rasterization_Half_Space\global.h">
+      <Filter>來源檔案</Filter>
+    </ClInclude>
+    <ClInclude Include="Lab09_Rasterization_Half_Space\line.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
     <ClInclude Include="Lab09_Rasterization_Half_Space\menu.h">
