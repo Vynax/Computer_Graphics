@@ -100,9 +100,9 @@ public:
 
 
         glColor3f(1.0f, 0.0f, 0.0f); // Red (RGB)
-        for (unsigned int i = 0; i < click_coor_vec.size(); i++) {
-            x = click_coor_vec[i].x;
-            y = click_coor_vec[i].y;
+        for (unsigned int i = 0; i < vertex_vec.size(); i++) {
+            x = vertex_vec[i].x;
+            y = vertex_vec[i].y;
             //x = (int)((click_vec[i].x - gridWidth / 2) / gridWidth);
             //y = (int)((click_vec[i].y - gridHeight / 2) / gridHeight);
 
@@ -136,11 +136,11 @@ public:
         for (int i = 0; i < size; i++) {
 
 
-            x1 = coor_vec[i].x;
-            y1 = coor_vec[i].y;
+            x1 = vertex_vec[i].x;
+            y1 = vertex_vec[i].y;
 
-            x2 = coor_vec[(i + 1) % size].x;
-            y2 = coor_vec[(i + 1) % size].y;
+            x2 = vertex_vec[(i + 1) % size].x;
+            y2 = vertex_vec[(i + 1) % size].y;
             glBegin(GL_LINES);
             glVertex3f(x1 * gridWidth, y1 * gridHeight, 0);
             glVertex3f(x2 * gridWidth, y2 * gridHeight, 0);
@@ -159,7 +159,7 @@ public:
         if (which_to_pop == -1)
             which_to_pop = 0;
 
-        coor_vec.clear();
+        vertex_vec.clear();
         // 借用 x 跟 y
         // 轉換座標
         for (unsigned int i = 0; i < click_vec.size(); i++) {
@@ -173,12 +173,12 @@ public:
                 y = y + 1;
 
             Coordinate temp2(x, y);
-            coor_vec.push_back(temp2);
+            vertex_vec.push_back(temp2);
         }
 
-        click_coor_vec = coor_vec;
+        //vertex_vec = coor_vec;
 
-        if (coor_vec.size() == 3)
+        if (vertex_vec.size() == 3)
             fillTriangle();
         //setLine(coor_vec[0].x, coor_vec[0].y, coor_vec[1].x, coor_vec[1].y, false);
     }
@@ -187,41 +187,41 @@ public:
         //int e1 = lineEq();
         int centerx = 0, centery = 0, xMin, xMax, yMin, yMax;
 
-        xMin = coor_vec[0].x; //給他們第一個點的數值
-        xMax = coor_vec[0].x;
-        yMin = coor_vec[0].y;
-        yMax = coor_vec[0].y;
-        for (unsigned int i = 0; i < coor_vec.size(); i++) {
-            if (xMin > coor_vec[i].x)   //找最大最小值
-                xMin = coor_vec[i].x;
-            if (xMax < coor_vec[i].x)
-                xMax = coor_vec[i].x;
-            if (yMin > coor_vec[i].y)
-                yMin = coor_vec[i].y;
-            if (yMax < coor_vec[i].y)
-                yMax = coor_vec[i].y;
+        xMin = vertex_vec[0].x; //給他們第一個點的數值
+        xMax = vertex_vec[0].x;
+        yMin = vertex_vec[0].y;
+        yMax = vertex_vec[0].y;
+        for (unsigned int i = 0; i < vertex_vec.size(); i++) {
+            if (xMin > vertex_vec[i].x)   //找最大最小值
+                xMin = vertex_vec[i].x;
+            if (xMax < vertex_vec[i].x)
+                xMax = vertex_vec[i].x;
+            if (yMin > vertex_vec[i].y)
+                yMin = vertex_vec[i].y;
+            if (yMax < vertex_vec[i].y)
+                yMax = vertex_vec[i].y;
 
-            centerx = centerx + coor_vec[i].x;  //計算三角形的中心點
-            centery = centery + coor_vec[i].y;
+            centerx = centerx + vertex_vec[i].x;  //計算三角形的中心點
+            centery = centery + vertex_vec[i].y;
         }
         centerx = centerx / 3;
         centery = centery / 3;
         Coordinate center(centerx, centery);
         //std::cout << 
-        for (unsigned int i = 0; i < coor_vec.size(); i++) {
-            coor_vec[i].angle = GetAngle(center, coor_vec[i]);
-            std::cout << "角度:" << coor_vec[i].angle << std::endl;
+        for (unsigned int i = 0; i < vertex_vec.size(); i++) {
+            vertex_vec[i].angle = GetAngle(center, vertex_vec[i]);
+            std::cout << "角度:" << vertex_vec[i].angle << std::endl;
         }
-        std::sort(coor_vec.begin(), coor_vec.begin() + 3, compare_angle); //逆時針排序，用角度排
-        for (unsigned int i = 0; i < coor_vec.size(); i++) {
-            std::cout << "排序後角度:" << coor_vec[i].angle << std::endl;
+        std::sort(vertex_vec.begin(), vertex_vec.begin() + 3, compare_angle); //逆時針排序，用角度排
+        for (unsigned int i = 0; i < vertex_vec.size(); i++) {
+            std::cout << "排序後角度:" << vertex_vec[i].angle << std::endl;
         }
 
         Line L1, L2, L3;
 
-        int e1 = lineEq(&L1, coor_vec[0], coor_vec[1], xMin, yMin);
-        int e2 = lineEq(&L2, coor_vec[1], coor_vec[2], xMin, yMin);
-        int e3 = lineEq(&L3, coor_vec[2], coor_vec[0], xMin, yMin);
+        int e1 = lineEq(&L1, vertex_vec[0], vertex_vec[1], xMin, yMin);
+        int e2 = lineEq(&L2, vertex_vec[1], vertex_vec[2], xMin, yMin);
+        int e3 = lineEq(&L3, vertex_vec[2], vertex_vec[0], xMin, yMin);
         int xDim = xMax - xMin + 1;
         std::cout << "xDim: " << xDim << std::endl;
         std::cout << "L1 = " << L1.a << "x + " << L1.b << "y + " << L1.c << " e1: " << e1 << std::endl;
@@ -302,6 +302,6 @@ private:
 
     std::vector<Coordinate> click_vec;
     std::vector<Coordinate> coor_vec; // 轉換後的座標
-    std::vector<Coordinate> click_coor_vec; //儲存轉換後的點擊座標
+    std::vector<Coordinate> vertex_vec; //儲存轉換後的點擊座標
     int which_to_pop = -1;
 };

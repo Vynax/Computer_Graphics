@@ -74,14 +74,14 @@ void reshape(GLsizei width, GLsizei height) {  // GLsizei for non-negative integ
     glLoadIdentity();             // Reset
     // Enable perspective projection with fovy, aspect, zNear and zFar
     // gluPerspective(45.0f, aspect, 0.1f, 100.0f);
-    float lengthX = config.lengthX;
-    float lengthY = config.lengthY;
-    float lengthZ = config.lengthZ;
+    //float lengthX = config.lengthX;
+    //float lengthY = config.lengthY;
+    //float lengthZ = config.lengthZ;
 
-    auto max_array = { lengthX,lengthY,lengthZ };
-    float max = *std::max_element(max_array.begin(), max_array.end());
+    //auto max_array = { lengthX,lengthY,lengthZ };
+    //float max = *std::max_element(max_array.begin(), max_array.end());
 
-    std::cout << "max:" << max << std::endl;
+    //std::cout << "max:" << max << std::endl;
 
     config.Set_Ortho_Width_Height(300, 300, 300);
     //config.Set_Grid_Width_Height();

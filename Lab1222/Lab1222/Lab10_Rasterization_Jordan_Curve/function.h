@@ -109,7 +109,13 @@ void mouseClicks(int button, int state, int x, int y) {     //當按下滑鼠左
         else
             clickY = (float)(height / 2 - y);
 
-        config.Add_New_Click((int)(clickX * config.orthoX * 2 / width), (int)(clickY * config.orthoY * 2 / height));
+        clickX = clickX * config.orthoX * 2 / width;
+        clickY = clickY * config.orthoY * 2 / height;
+
+        std::cout << "Width:" << width << " Height:" << height << " x:" << x << " y:" << y;
+        std::cout << " ClickX:" << clickX << " ClickY:" << clickY << std::endl;
+
+        config.Add_New_Click((int)(clickX), (int)(clickY));
 
         //config.clickX = clickX * config.orthoX * 2 / width;
         //config.clickY = clickY * config.orthoY * 2 / height;
@@ -117,8 +123,6 @@ void mouseClicks(int button, int state, int x, int y) {     //當按下滑鼠左
         //clickX = clickX / width * range;
         //clickY = clickY / height * range;
 
-        std::cout << "Width:" << width << " Height:" << height << " x:" << x << " y:" << y;
-        std::cout << " ClickX:" << config.clickX << " ClickY:" << config.clickY << std::endl;
 
 
         //Click = true;
