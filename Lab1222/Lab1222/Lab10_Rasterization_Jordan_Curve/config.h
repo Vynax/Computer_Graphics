@@ -26,6 +26,7 @@ public:
         //Set_Grid_Amount(9);
         clickX = clickY = clickZ = 0;
         //which_to_pop = -1;
+        fill_in = false;
     }
 
     void Set_Ortho_Width_Height(GLfloat X, GLfloat Y, GLfloat Z) {
@@ -148,12 +149,25 @@ public:
         }
     }
 
+    void reset() {
+        click_vec.clear();
+        coor_vec.clear();
+        vertex_vec.clear();
+
+        fill_in = false;
+    }
+
     void Add_New_Click(int x, int y) {
+
+        if (fill_in)
+            return;
         //重置三角形
-        if (which_to_pop != -1 && click_vec.size() == 3) {
-            click_vec.clear();
-            coor_vec.clear();
-        }
+
+
+        //if (which_to_pop != -1 && click_vec.size() == 3) {
+        //    click_vec.clear();
+        //    coor_vec.clear();
+        //}
         Coordinate temp(x, y);
         click_vec.push_back(temp);
         if (which_to_pop == -1)
@@ -178,13 +192,95 @@ public:
 
         //vertex_vec = coor_vec;
 
-        if (vertex_vec.size() == 3)
-            fillTriangle();
+        //if (vertex_vec.size() == 3)
+        //    fillTriangle();
         //setLine(coor_vec[0].x, coor_vec[0].y, coor_vec[1].x, coor_vec[1].y, false);
     }
+
+    int jordanInside(std::vector<Coordinate> *vList, int x, int y) {
+        int cross = 0;
+        int x0, y0, x1, y1;
+        int n = vList->size();
+
+        x0 = (*vList)[n - 1].x - x;
+        y0 = (*vList)[n - 1].y - y;
+        for (int i = 0; i < n; i++) {
+            x1 = (*vList)[i].x - x;
+            y1 = (*vList)[i].y - y;
+            if (y0 > 0) {
+                if (y1 <= 0) {
+                    if (x1*y0 > y1*x0)
+                        cross++;
+                }
+            }
+            else
+                if (y1 > 0)
+                    if (x0*y1 > y0*x1)
+                        cross++;
+            x0 = x1;
+            y0 = y1;
+        }
+
+        return cross & 1;
+
+    }
+
+    void fillPolygon() {
+        if (fill_in)
+            return;
+
+        int centerx = 0, centery = 0, xMin, xMax, yMin, yMax;
+        int size = vertex_vec.size();
+
+        xMin = vertex_vec[0].x; //給他們第一個點的數值
+        xMax = vertex_vec[0].x;
+        yMin = vertex_vec[0].y;
+        yMax = vertex_vec[0].y;
+        for (unsigned int i = 0; i < size; i++) {
+            if (xMin > vertex_vec[i].x)   //找最大最小值
+                xMin = vertex_vec[i].x;
+            if (xMax < vertex_vec[i].x)
+                xMax = vertex_vec[i].x;
+            if (yMin > vertex_vec[i].y)
+                yMin = vertex_vec[i].y;
+            if (yMax < vertex_vec[i].y)
+                yMax = vertex_vec[i].y;
+
+            centerx = centerx + vertex_vec[i].x;  //計算三角形的中心點
+            centery = centery + vertex_vec[i].y;
+        }
+        centerx = centerx / size;
+        centery = centery / size;
+        Coordinate center(centerx, centery);
+        //std::cout << 
+        //for (unsigned int i = 0; i < size; i++) {
+        //    vertex_vec[i].angle = GetAngle(center, vertex_vec[i]);
+        //    std::cout << "角度:" << vertex_vec[i].angle << std::endl;
+        //}
+        //std::sort(vertex_vec.begin(), vertex_vec.begin() + size, compare_angle); //逆時針排序，用角度排
+        //for (unsigned int i = 0; i < size; i++) {
+        //    std::cout << "排序後角度:" << vertex_vec[i].angle << std::endl;
+        //}
+        for (int y = yMin; y <= yMax; y++) {
+            for (int x = xMin; x <= xMax; x++) {
+                if (jordanInside(&vertex_vec, x, y))
+                    Add_Coor_to_Vec(&coor_vec, x, y);
+            }
+        }
+
+        fill_in = true;
+    }
+
+    void counter_clockwise_vertex() {
+
+    }
+
     // (x2 - x1) (y - y1) = (y2 - y1) (x - x1)
     void fillTriangle() {
         //int e1 = lineEq();
+        if (fill_in)
+            return;
+
         int centerx = 0, centery = 0, xMin, xMax, yMin, yMax;
 
         xMin = vertex_vec[0].x; //給他們第一個點的數值
@@ -243,6 +339,7 @@ public:
             e2 = e2 - xDim * L2.a + L2.b;
             e3 = e3 - xDim * L3.a + L3.b;
         }
+        fill_in = true;
     }
 
     float GetAngle(Coordinate a, Coordinate b)
@@ -282,7 +379,7 @@ public:
 
     //float midX, midY, midZ;
 
-    float lengthX, lengthY, lengthZ;
+    //float lengthX, lengthY, lengthZ;
     GLfloat orthoX;
     GLfloat orthoY;
     GLfloat orthoZ;
@@ -299,6 +396,8 @@ private:
 
     GLfloat gridWidth;
     GLfloat gridHeight;
+
+    bool fill_in; // 拿來紀錄多邊形是否已經填入一堆點
 
     std::vector<Coordinate> click_vec;
     std::vector<Coordinate> coor_vec; // 轉換後的座標
