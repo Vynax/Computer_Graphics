@@ -15,30 +15,30 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Lab10_Rasterization_Jordan_Curve\config.h">
+    <ClInclude Include="Final\config.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
-    <ClInclude Include="Lab10_Rasterization_Jordan_Curve\coordinate.h">
+    <ClInclude Include="Final\draw.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
-    <ClInclude Include="Lab10_Rasterization_Jordan_Curve\draw.h">
+    <ClInclude Include="Final\function.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
-    <ClInclude Include="Lab10_Rasterization_Jordan_Curve\function.h">
+    <ClInclude Include="Final\global.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
-    <ClInclude Include="Lab10_Rasterization_Jordan_Curve\global.h">
+    <ClInclude Include="Final\menu.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
-    <ClInclude Include="Lab10_Rasterization_Jordan_Curve\line.h">
-      <Filter>來源檔案</Filter>
-    </ClInclude>
-    <ClInclude Include="Lab10_Rasterization_Jordan_Curve\menu.h">
+    <ClInclude Include="Final\objloader.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lab10_Rasterization_Jordan_Curve\Lab10_Rasterization_Jordan_Curve.cpp">
+    <ClCompile Include="Final\Final.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="Final\objloader.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>

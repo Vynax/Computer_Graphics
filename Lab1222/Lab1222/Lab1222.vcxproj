@@ -19,16 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Lab10_Rasterization_Jordan_Curve\config.h" />
-    <ClInclude Include="Lab10_Rasterization_Jordan_Curve\coordinate.h" />
-    <ClInclude Include="Lab10_Rasterization_Jordan_Curve\draw.h" />
-    <ClInclude Include="Lab10_Rasterization_Jordan_Curve\function.h" />
-    <ClInclude Include="Lab10_Rasterization_Jordan_Curve\global.h" />
-    <ClInclude Include="Lab10_Rasterization_Jordan_Curve\line.h" />
-    <ClInclude Include="Lab10_Rasterization_Jordan_Curve\menu.h" />
+    <ClInclude Include="Final\config.h" />
+    <ClInclude Include="Final\draw.h" />
+    <ClInclude Include="Final\function.h" />
+    <ClInclude Include="Final\global.h" />
+    <ClInclude Include="Final\menu.h" />
+    <ClInclude Include="Final\objloader.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lab10_Rasterization_Jordan_Curve\Lab10_Rasterization_Jordan_Curve.cpp" />
+    <ClCompile Include="Final\Final.cpp" />
+    <ClCompile Include="Final\objloader.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -107,7 +107,6 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
