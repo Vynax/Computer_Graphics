@@ -33,12 +33,24 @@
     <ClInclude Include="Final\objloader.h">
       <Filter>來源檔案</Filter>
     </ClInclude>
+    <ClInclude Include="Final\shared\math3d.h">
+      <Filter>來源檔案</Filter>
+    </ClInclude>
+    <ClInclude Include="Final\TGATexture.h">
+      <Filter>來源檔案</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Final\Final.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
     <ClCompile Include="Final\objloader.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="Final\shared\math3d.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="Final\TGATexture.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>

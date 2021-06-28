@@ -3,184 +3,223 @@
 #include <fstream>
 #include <sstream>
 #include <filesystem>
-#include <cstdlib> /* ¶Ã¼Æ¬ÛÃö¨ç¼Æ */
+#include <cstdlib> /* äº‚æ•¸ç›¸é—œå‡½æ•¸ */
 
 ObjLoader::ObjLoader(std::string filename)
 {
-	std::ifstream file(filename);
-	std::string line;
-	int i = 0;
+    std::ifstream file(filename);
+    std::string line;
+    int i = 0;
 
-	//namespace fs = std::filesystem;
-	//std::string path = ".";
-	//for (const auto & entry : fs::directory_iterator(path))
-	//	std::cout << entry.path() << std::endl;
+    //namespace fs = std::filesystem;
+    //std::string path = ".";
+    //for (const auto & entry : fs::directory_iterator(path))
+    //  std::cout << entry.path() << std::endl;
+    name = filename;
+    std::cout << "æª”å" << filename << std::endl;
+    while (std::getline(file, line))
+    {
+        if (line.substr(0, 1) == "v")
+        {
+            std::vector<GLfloat> Point;
+            GLfloat x, y, z;
+            std::istringstream s(line.substr(2));
+            s >> x;
+            s >> y;
+            s >> z;
 
-	std::cout << "ÀÉ¦W" << filename << std::endl;
-	while (std::getline(file, line))
-	{
-		if (line.substr(0, 1) == "v")
-		{
-			std::vector<GLfloat> Point;
-			GLfloat x, y, z;
-			std::istringstream s(line.substr(2));
-			s >> x; s >> y; s >> z;
+            //åµæ¸¬æœ€å¤§å€¼æœ€å°å€¼
+            if (i == 0)
+            {
+                minX = maxX = x;
+                minY = maxY = y;
+                minZ = maxZ = z;
+                std::cout << "åˆå§‹å€¼:" << std::endl;
+                std::cout << "maxX:" << maxX << std::endl;
+                std::cout << "minX:" << minX << std::endl;
+                std::cout << "maxY:" << maxY << std::endl;
+                std::cout << "minY:" << minY << std::endl;
+                std::cout << "maxZ:" << maxZ << std::endl;
+                std::cout << "minZ:" << minZ << std::endl;
+            }
 
-			//°»´ú³Ì¤j­È³Ì¤p­È
-			if (i == 0) {
-				minX = maxX = x;
-				minY = maxY = y;
-				minZ = maxZ = z;
-				std::cout << "ªì©l­È:" << std::endl;
-				std::cout << "maxX:" << maxX << std::endl;
-				std::cout << "minX:" << minX << std::endl;
-				std::cout << "maxY:" << maxY << std::endl;
-				std::cout << "minY:" << minY << std::endl;
-				std::cout << "maxZ:" << maxZ << std::endl;
-				std::cout << "minZ:" << minZ << std::endl;
-			}
+            if (maxX < x)
+                maxX = x;
+            if (minX > x)
+            {
+                minX = x;
+                // std::cout << "ç¬¬" << i << "å€‹é»" << std::endl;
+            }
 
-			if (maxX < x)
-				maxX = x;
-			if (minX > x) {
-				minX = x;
-				// std::cout << "²Ä" << i << "­ÓÂI" << std::endl;
-			}
+            if (maxY < y)
+                maxY = y;
+            if (minY > y)
+                minY = y;
 
-			if (maxY < y)
-				maxY = y;
-			if (minY > y)
-				minY = y;
+            if (maxZ < z)
+                maxZ = z;
+            if (minZ > z)
+                minZ = z;
 
-			if (maxZ < z)
-				maxZ = z;
-			if (minZ > z)
-				minZ = z;
+            Point.push_back(x);
+            Point.push_back(y);
+            Point.push_back(z);
+            v.push_back(Point);
 
-			Point.push_back(x);
-			Point.push_back(y);
-			Point.push_back(z);
-			v.push_back(Point);
+            //std::cout << "read: x = " << x << " y = " << y << " z = " << z << std::endl;
+            i++;
+        }
+        else if (line.substr(0, 1) == "f")
+        {
+            std::vector<GLint> vIndexSets;
+            GLint u, v, w, x;
+            std::istringstream vtns(line.substr(2));
+            //vtns >> u; vtns >> v; vtns >> w;
 
-			//std::cout << "read: x = " << x << " y = " << y << " z = " << z << std::endl;
-			i++;
-		}
-		else if (line.substr(0, 1) == "f")
-		{
-			std::vector<GLint> vIndexSets;
-			GLint u, v, w, x;
-			std::istringstream vtns(line.substr(2));
-			//vtns >> u; vtns >> v; vtns >> w;
+            //vIndexSets.push_back(u - 1);
+            //vIndexSets.push_back(v - 1);
+            //vIndexSets.push_back(w - 1);
 
-			//vIndexSets.push_back(u - 1);
-			//vIndexSets.push_back(v - 1);
-			//vIndexSets.push_back(w - 1);
+            while (!vtns.eof())
+            {
+                vtns >> x;
+                vIndexSets.push_back(x - 1);
+            }
+            f.push_back(vIndexSets);
+        }
 
-			while (!vtns.eof()) {
-				vtns >> x;
-				vIndexSets.push_back(x - 1);
-			}
-			f.push_back(vIndexSets);
-		}
+        //std::cout << "reading...." << std::endl;
 
-		//std::cout << "reading...." << std::endl;
+        random_Color = false;
+    }
+    file.close();
+    std::cout << "v size : " << v.size() << "f size:" << f.size() << std::endl;
+    std::cout << "maxX:" << maxX << std::endl;
+    std::cout << "minX:" << minX << std::endl;
+    std::cout << "maxY:" << maxY << std::endl;
+    std::cout << "minY:" << minY << std::endl;
+    std::cout << "maxZ:" << maxZ << std::endl;
+    std::cout << "minZ:" << minZ << std::endl;
 
-		random_Color = false;
-	}
-	file.close();
-	std::cout << "v size : " << v.size() << "f size:" << f.size() << std::endl;
-	std::cout << "maxX:" << maxX << std::endl;
-	std::cout << "minX:" << minX << std::endl;
-	std::cout << "maxY:" << maxY << std::endl;
-	std::cout << "minY:" << minY << std::endl;
-	std::cout << "maxZ:" << maxZ << std::endl;
-	std::cout << "minZ:" << minZ << std::endl;
+    midX = (maxX + minX) / 2;
+    midY = (maxY + minY) / 2;
+    midZ = (maxZ + minZ) / 2;
 
-	midX = (maxX + minX) / 2;
-	midY = (maxY + minY) / 2;
-	midZ = (maxZ + minZ) / 2;
+    std::cout << "midX:" << midX << std::endl;
+    std::cout << "midY:" << midY << std::endl;
+    std::cout << "midZ:" << midZ << std::endl;
 
-	std::cout << "midX:" << midX << std::endl;
-	std::cout << "midY:" << midY << std::endl;
-	std::cout << "midZ:" << midZ << std::endl;
+    lengthX = abs(maxX - minX);
+    lengthY = abs(maxY - minY);
+    lengthZ = abs(maxZ - minZ);
 
-	lengthX = abs(maxX - minX);
-	lengthY = abs(maxY - minY);
-	lengthZ = abs(maxZ - minZ);
+    std::cout << "lengthX:" << lengthX << std::endl;
+    std::cout << "lengthY:" << lengthY << std::endl;
+    std::cout << "lengthZ:" << lengthZ << std::endl;
 
-	std::cout << "lengthX:" << lengthX << std::endl;
-	std::cout << "lengthY:" << lengthY << std::endl;
-	std::cout << "lengthZ:" << lengthZ << std::endl;
-
-	draw_BoundingBox = true;
+    draw_BoundingBox = true;
 }
 
-void ObjLoader::Draw()
+void ObjLoader::Draw(vertex center, GLuint texID)
 {
-	//glBegin(GL_TRIANGLES);//¶}©lÃ¸»s
-	glColor3f(255.0f, 255.0f, 255.0f);
-	for (int i = 0; i < f.size(); i++) {
-		vertex temp;
-		if (random_Color) {
-			float r = (float)rand() / (RAND_MAX + 1.0);
-			float g = (float)rand() / (RAND_MAX + 1.0);
-			float b = (float)rand() / (RAND_MAX + 1.0);
-			glColor3f(r, g, b);
-		}
-		else
-			glColor3f(1.0, 1.0, 1.0);
-		glBegin(GL_POLYGON);
+    M3DVector3f vNormal;
+    M3DVector3f vCorners[4];
+    //glBegin(GL_TRIANGLES);//é–‹å§‹ç¹ªè£½
+    glColor3f(255.0f, 255.0f, 255.0f);
+    for (int i = 0; i < f.size(); i++)
+    {
+        vertex temp;
+        if (random_Color)
+        {
+            float r = (float)rand() / (RAND_MAX + 1.0);
+            float g = (float)rand() / (RAND_MAX + 1.0);
+            float b = (float)rand() / (RAND_MAX + 1.0);
+            glColor3f(r, g, b);
+        }
+        else
+            glColor3f(1.0, 1.0, 1.0);
 
-		for (int j = 0; j < f[i].size(); j++) {
-			GLint VertexIndex = (f[i])[j];
-			temp.x = (v[VertexIndex])[0];
-			temp.y = (v[VertexIndex])[1];
-			temp.z = (v[VertexIndex])[2];
+        glBindTexture(GL_TEXTURE_2D, texID);
 
-			glVertex3f(temp.x, temp.y, temp.z);
-		}
-		glEnd();
-	}
-	//std::cout << "obj draw:" << std::endl;
+        glBegin(GL_POLYGON);
 
+        for (int j = 0; j < f[i].size(); j++)
+        {
+            GLint VertexIndex = (f[i])[j];
+            temp.x = (v[VertexIndex])[0];
+            temp.y = (v[VertexIndex])[1];
+            temp.z = (v[VertexIndex])[2];
 
-	//µe¤»­±ªº®Ø®Ø¡A°½Ãi¥uµe¤­­Ó­±¡A²Ä¤»­Ó­±ªº½u­è¦n³£¦³
-	if (draw_BoundingBox) {
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+            if (name == "humanoid_quad.obj") {
+                temp.x = temp.x / 5;
+                temp.y = temp.y / 5;
+                temp.z = temp.z / 5;
+            }
 
-		glBegin(GL_POLYGON);
-		glVertex3f(minX, maxY, minZ);
-		glVertex3f(maxX, maxY, minZ);
-		glVertex3f(maxX, minY, minZ);
-		glVertex3f(minX, minY, minZ);
-		glEnd();
+            vCorners[j][0] = temp.x;
+            vCorners[j][1] = temp.y;
+            vCorners[j][2] = temp.z;
+        }
+        m3dFindNormal(vNormal, vCorners[0], vCorners[1], vCorners[2]);
+        glNormal3fv(vNormal);
+        for (int j = 0; j < f[i].size(); j++)
+        {
+            GLint VertexIndex = (f[i])[j];
+            temp.x = (v[VertexIndex])[0];
+            temp.y = (v[VertexIndex])[1];
+            temp.z = (v[VertexIndex])[2];
+            if (name == "humanoid_quad.obj") {
+                temp.x = temp.x / 5;
+                temp.y = temp.y / 5;
+                temp.z = temp.z / 5;
+            }
 
-		glBegin(GL_POLYGON);
-		glVertex3f(maxX, maxY, minZ);
-		glVertex3f(maxX, minY, minZ);
-		glVertex3f(maxX, minY, maxZ);
-		glVertex3f(maxX, maxY, maxZ);
-		glEnd();
+            glTexCoord2f(temp.x, temp.y);
+            glVertex3f(temp.x, temp.y, temp.z);
+        }
 
-		glBegin(GL_POLYGON);
-		glVertex3f(minX, maxY, minZ);
-		glVertex3f(maxX, maxY, minZ);
-		glVertex3f(maxX, maxY, maxZ);
-		glVertex3f(minX, maxY, maxZ);
-		glEnd();
+        glEnd();
+    }
+    //std::cout << "obj draw:" << std::endl;
 
-		glBegin(GL_POLYGON);
-		glVertex3f(minX, maxY, minZ);
-		glVertex3f(minX, maxY, maxZ);
-		glVertex3f(minX, minY, maxZ);
-		glVertex3f(minX, minY, minZ);
-		glEnd();
+    //ç•«å…­é¢çš„æ¡†æ¡†ï¼Œå·æ‡¶åªç•«äº”å€‹é¢ï¼Œç¬¬å…­å€‹é¢çš„ç·šå‰›å¥½éƒ½æœ‰
+    //if (draw_BoundingBox)
+    //{
+    //    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-		glBegin(GL_POLYGON);
-		glVertex3f(minX, maxY, maxZ);
-		glVertex3f(maxX, maxY, maxZ);
-		glVertex3f(maxX, minY, maxZ);
-		glVertex3f(minX, minY, maxZ);
-		glEnd();
-	}
+    //    glBegin(GL_POLYGON);
+    //    glVertex3f(minX, maxY, minZ);
+    //    glVertex3f(maxX, maxY, minZ);
+    //    glVertex3f(maxX, minY, minZ);
+    //    glVertex3f(minX, minY, minZ);
+    //    glEnd();
+
+    //    glBegin(GL_POLYGON);
+    //    glVertex3f(maxX, maxY, minZ);
+    //    glVertex3f(maxX, minY, minZ);
+    //    glVertex3f(maxX, minY, maxZ);
+    //    glVertex3f(maxX, maxY, maxZ);
+    //    glEnd();
+
+    //    glBegin(GL_POLYGON);
+    //    glVertex3f(minX, maxY, minZ);
+    //    glVertex3f(maxX, maxY, minZ);
+    //    glVertex3f(maxX, maxY, maxZ);
+    //    glVertex3f(minX, maxY, maxZ);
+    //    glEnd();
+
+    //    glBegin(GL_POLYGON);
+    //    glVertex3f(minX, maxY, minZ);
+    //    glVertex3f(minX, maxY, maxZ);
+    //    glVertex3f(minX, minY, maxZ);
+    //    glVertex3f(minX, minY, minZ);
+    //    glEnd();
+
+    //    glBegin(GL_POLYGON);
+    //    glVertex3f(minX, maxY, maxZ);
+    //    glVertex3f(maxX, maxY, maxZ);
+    //    glVertex3f(maxX, minY, maxZ);
+    //    glVertex3f(minX, minY, maxZ);
+    //    glEnd();
+    //}
 }

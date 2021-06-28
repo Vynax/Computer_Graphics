@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include <GL/glut.h>  // GLUT, include glu.h and gl.h
 #include <algorithm>    // std::swap
@@ -19,7 +19,7 @@ public:
         obj_vec.push_back(ObjLoader("teapot.obj"));
 
         setObj_Draw(3);
-        Set_Render_Mode(2);
+        //Set_Render_Mode(2);
     }
     /*~Config() {
         delete[] translateMatrix;
@@ -70,7 +70,7 @@ public:
             glPolygonMode(GL_FRONT, GL_FILL);
             break;
         }
-        obj_vec[obj_draw].Draw();
+        //obj_vec[obj_draw].Draw();
     }
 
     void setObj_Draw(int which) {

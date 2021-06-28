@@ -1,28 +1,31 @@
 #pragma once
 #include <vector>
 #include <iostream>
-#include <GL/glut.h>  // GLUT, include glu.h and gl.h
+#include <GL/glut.h> // GLUT, include glu.h and gl.h
+#include "shared/math3d.h"    // 3D Math Library
 
+struct vertex
+{
+    float x;
+    float y;
+    float z;
+};
 class ObjLoader
 {
 public:
-	struct vertex
-	{
-		float x;
-		float y;
-		float z;
-	};
-	ObjLoader(std::string filename);//Åª¨ú¨ç¼Æ
-	ObjLoader() {}
-	void Draw();//Ã¸»s¨ç¼Æ
+    ObjLoader(std::string filename); //è®€å–å‡½æ•¸
+    ObjLoader() {}
+    void Draw(vertex center, GLuint texID); //ç¹ªè£½å‡½æ•¸
 
-	float minX, maxX, minY, maxY, minZ, maxZ;
-	float midX, midY, midZ;
+    float minX, maxX, minY, maxY, minZ, maxZ;
+    float midX, midY, midZ;
 
-	float lengthX, lengthY, lengthZ;
-	bool draw_BoundingBox;
-	bool random_Color;
+    float lengthX, lengthY, lengthZ;
+    bool draw_BoundingBox;
+    bool random_Color;
+
 private:
-	std::vector<std::vector<GLfloat>> v;//¦s©ñ³»ÂI(x,y,z)®y¼Ğ
-	std::vector<std::vector<GLint>> f;//¦s©ñ­±ªº¤T­Ó³»ÂI¯Á¤Ş
+    std::vector<std::vector<GLfloat>> v; //å­˜æ”¾é ‚é»(x,y,z)åº§æ¨™
+    std::vector<std::vector<GLint>> f;   //å­˜æ”¾é¢çš„ä¸‰å€‹é ‚é»ç´¢å¼•
+    std::string name;
 };

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #define angleX 0
 #define angleY -30
 #define angleZ 0
@@ -7,7 +7,7 @@
 #include "objloader.h"
 
 /* Global variables */
-static char title[] = "Lab07_Midterm_ObjParser";
+static char title[] = "Final Project";
 static float tx = 0, ty = 0, tz = 0;
 static float thetaX = angleX, thetaY = angleY, thetaZ = angleZ;
 static float range = 15;
