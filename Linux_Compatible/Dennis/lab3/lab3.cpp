@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cmath>
-#include <freeglut.h>
+#include <GL/glut.h> // GLUT, include glu.h and gl.h
 
 enum MyAxis
 {
@@ -53,7 +53,7 @@ int main(int argc, char **argv)
 {
     sx = sy = sz = 1;
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(400, 400);
     glutInitWindowPosition(600, 80);
     glutCreateWindow("Moving Cube");

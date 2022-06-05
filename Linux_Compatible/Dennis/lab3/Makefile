@@ -1,12 +1,12 @@
 CPP=g++
-LDFLAGS=-lglut -lglew -framework opengl
+LDFLAGS=-lglut -lGLU -lGL
 
 .PHONY: clean
 
 all:lab3
 
 lab3: lab3.cpp
-	$(CPP) $(LDFLAGS) $< -o $@
+	$(CPP) $< -o $@ $(LDFLAGS)
 
 test: lab3
 	./lab3
