@@ -8,14 +8,6 @@
 #include <GL/glut.h>  // GLUT, include glu.h and gl.h
 #include "global.h"
 
-float getSin(float theta) {
-	return (float)sin(theta * M_PI / 180.0);
-}
-
-float getCos(float theta) {
-	return (float)cos(theta * M_PI / 180.0);
-}
-
 void myKeyboard(unsigned char key, int x, int y) {
 	// std::cout << "key" << std::endl;
 	switch (key) {
